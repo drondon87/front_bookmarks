@@ -1,0 +1,38 @@
+<div class="card bg-dark text-white mt-2">
+    <div class="card-header text-center">{{ "BOOK.ADD_BOOK_TITLE" | translate}}</div>
+    <div class="card-body">
+        <form [formGroup]="libroForm" (ngSubmit)="guardarLibro()">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK.NAME" | translate}} </label>
+                <input [class.is-invalid]="nombre.invalid && nombre.touched" type="text" formControlName="nombre" class="form-control" required>
+                <small class="text-danger " *ngIf="nombre.invalid && nombre.touched ">{{ "VALIDATION.NAME_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK.AUTHOR" | translate}} </label>
+                <input [class.is-invalid]="autor.invalid && autor.touched" type="text" formControlName="autor" class="form-control" required>
+                <small class="text-danger " *ngIf="autor.invalid && autor.touched ">{{ "VALIDATION.AUTHOR_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK.DESCRIPTION" | translate}} </label>
+                <textarea [class.is-invalid]="descripcion.invalid && descripcion.touched" class="form-control" formControlName="descripcion" required></textarea>
+                <small class="text-danger " *ngIf="descripcion.invalid && descripcion.touched ">{{ "VALIDATION.DESCRIPTION_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK.DATE" | translate}}</label>
+                <input [class.is-invalid]="fechaLibro.invalid && fechaLibro.touched" type="text" formControlName="fechaLibro" class="form-control" required>
+                <small class="text-danger" *ngIf="fechaLibro.invalid && fechaLibro.touched ">{{ "VALIDATION.DATE_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK.CATEGORY" | translate}}</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" formControlName="categoriaId">
+                    <option *ngFor="let categoria of categorias" [value]="categoria.id"> {{categoria.nombre}} </option>
+                  </select>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mt-3">
+                    <button type="submit" *ngIf="!consulta" [disabled]="libroForm.invalid" class="btn btn-primary">{{ 'SHARED.BUTTONS.SAVE' | translate }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+{
+    "MENU": {
+        "CATEGORY_MENU": "Category",
+        "BOOKS_MENU": "Books",
+        "CHRONOLOGY_MENU": "Chronology",
+        "BOOKS_CATEGOY_MENU": "Books by Category",
+        "CHAPTERS_MENU": "Chapters"
+    },
+    "SHARED": {
+        "BUTTONS": {
+            "ADD_CATEGORY": "Add Category",
+            "ADD_BOOK": "Add Book",
+            "EDIT": "Edit",
+            "DELETE": "Delete",
+            "SAVE": "Save",
+            "CONSULT": "Consult",
+            "SEARCH": "Search"
+        }
+    },
+    "CATEGORY": {
+        "CATEGORY_TITLE": "Category",
+        "CATEGORY_LIST": "Category List",
+        "ID": "Id",
+        "NAME": "Name",
+        "DESCRIPTION": "Description",
+        "ADD_CATEGORY_TITLE": "Add Category",
+        "CONSULT_CATEGORY_TITLE": "Consult Category"
+    },
+    "BOOK": {
+        "BOOK_TITLE": "Books",
+        "BOOK_CATEGORY_TITLE": "Category Books",
+        "BOOK_LIST": "Book List",
+        "ID": "Id",
+        "NAME": "Name",
+        "CATEGORY": "Category",
+        "WARNING_LIST": "No registry exists",
+        "ADD_BOOK_TITLE": "Add Book",
+        "DESCRIPTION": "Description",
+        "DATE": "Date",
+        "AUTHOR": "Author"
+    },
+    "VALIDATION": {
+        "NAME_REQUIRED": "Name is required",
+        "DESCRIPTION_REQUIRED": "Description is required",
+        "NAME_CHARACTERS": "Name must be at least 4 characters",
+        "DATE_REQUIRED": "Date is required",
+        "AUTHOR_REQUIRED": "Author is required"
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "MENU": {
+        "CATEGORY_MENU": "Categorias",
+        "BOOKS_MENU": "Libros",
+        "CHRONOLOGY_MENU": "Cronologías",
+        "BOOKS_CATEGOY_MENU": "Libros por Categoria",
+        "CHAPTERS_MENU": "Capítulos"
+    },
+    "SHARED": {
+        "BUTTONS": {
+            "ADD_CATEGORY": "Crear Categoria",
+            "ADD_BOOK": "Crear Libro",
+            "EDIT": "Editar",
+            "DELETE": "Eliminar",
+            "SAVE": "Guardar",
+            "CONSULT": "Consultar",
+            "SEARCH": "Buscar"
+        }
+    },
+    "CATEGORY": {
+        "CATEGORY_TITLE": "Categorias",
+        "CATEGORY_LIST": "Listado Categorias",
+        "ID": "Id",
+        "NAME": "Nombre",
+        "DESCRIPTION": "Descripción",
+        "ADD_CATEGORY_TITLE": "Crear Categoría",
+        "CONSULT_CATEGORY_TITLE": "Consultar Categoría"
+    },
+    "BOOK": {
+        "BOOK_TITLE": "Libros",
+        "BOOK_CATEGORY_TITLE": "Libros por Categoria",
+        "BOOK_LIST": "Listado Libros",
+        "ID": "Id",
+        "NAME": "Nombre",
+        "CATEGORY": "Categoria",
+        "WARNING_LIST": "No existen registros actualmente",
+        "ADD_BOOK_TITLE": "Crear Libro",
+        "DESCRIPTION": "Descripción",
+        "DATE": "Fecha",
+        "AUTHOR": "Autor"
+    },
+    "VALIDATION": {
+        "NAME_REQUIRED": "Nombre es requerido",
+        "DESCRIPTION_REQUIRED": "Descripción es requerido",
+        "NAME_CHARACTERS": "Nombre debe tener la menos 4 caracteres",
+        "DATE_REQUIRED": "Fecha es requerido",
+        "AUTHOR_REQUIRED": "Autor es requerido"
+    }
+}

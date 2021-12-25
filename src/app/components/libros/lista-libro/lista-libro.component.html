@@ -1,0 +1,36 @@
+<div class="card border-primary mb-3 mt-2">
+    <div class="card-header"> {{ "BOOK.BOOK_TITLE" | translate}} </div>
+    <div class="card-body text-primary">
+        <h5 class="card-title">{{ "BOOK.BOOK_LIST" | translate }}</h5>
+        <div class="my-2 text-left">
+            <button type="button" routerLink="/libros/form" class="btn btn-rounded btn-primary">{{ "SHARED.BUTTONS.ADD_BOOK" | translate }}</button>
+        </div>
+        <div *ngIf="libros?.length == 0" class="alert alert-info">
+            {{ "BOOK.WARNING_LIST" | translate }}
+        </div>
+        <table class="table table-bordered table-striped" *ngIf="libros?.length>0">
+            <thead>
+                <tr>
+                    <th class="text-center">{{ "BOOK.ID" | translate }}</th>
+                    <th class="text-center">{{ "BOOK.NAME" | translate }}</th>
+                    <th class="text-center">{{ "BOOK.CATEGORY" | translate }}</th>
+                    <th class="text-center"> # </th>
+                    <th class="text-center"> # </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let libro of libros">
+                    <td class="text-center"> {{libro.id }} </td>
+                    <td> {{libro.nombre}} </td>
+                    <td class="text-center"> {{libro.categoria.nombre}} </td>
+                    <td class="text-center">
+                        <button type="button" [routerLink]="['/libros/form',libro.id]" class="btn btn-primary btn-sm">{{ "SHARED.BUTTONS.CONSULT" | translate }}</button>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" name="eliminar" class="btn btn-danger btn-sm" (click)="eliminarLibro(libro)">{{ "SHARED.BUTTONS.DELETE" | translate }}</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
