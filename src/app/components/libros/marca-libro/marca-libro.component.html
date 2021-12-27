@@ -1,0 +1,35 @@
+<div class="card bg-dark text-white mt-2">
+    <div class="card-header text-center" *ngIf="!consulta">{{ "BOOK_MARKS.ADD_BOOK_MARK_TITLE" | translate}}</div>
+    <div class="card-header text-center" *ngIf="consulta"> {{ "BOOK_MARKS.CONSULT_BOOK_MARK_TITLE" | translate}} </div>
+    <div class="card-body">
+        <div class="col-sm-12 mb-3" style="text-align: right;">
+            <button type="button" (click)="volver()" class="btn btn-primary">{{ 'SHARED.BUTTONS.BACK' | translate }}</button>
+        </div>
+        <form [formGroup]="marcaLibroForm" (ngSubmit)="guardarMarcaLibro()">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK_MARKS.DESCRIPTION" | translate}} </label>
+                <input [class.is-invalid]="descripcion.invalid && descripcion.touched" type="text" formControlName="descripcion" class="form-control" required>
+                <small class="text-danger " *ngIf="descripcion.invalid && descripcion.touched ">{{ "VALIDATION.DESCRIPTION_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK_MARKS.PAGES" | translate}} </label>
+                <input [class.is-invalid]="paginas.invalid && paginas.touched" type="text" formControlName="paginas" class="form-control" required>
+                <small class="text-danger " *ngIf="paginas.invalid && paginas.touched ">{{ "VALIDATION.PAGES_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "CHAPTERS.CHAPTER_TITLE" | translate}} </label>
+                <input [class.is-invalid]="capitulo.invalid && capitulo.touched" type="text" formControlName="capitulo" class="form-control" required>
+                <small class="text-danger " *ngIf="capitulo.invalid && capitulo.touched ">{{ "VALIDATION.PAGES_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK_MARKS.RESUME" | translate}} </label>
+                <textarea class="form-control" formControlName="resumen"></textarea>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mt-3">
+                    <button type="submit" *ngIf="!consulta" [disabled]="marcaLibroForm.invalid" class="btn btn-primary">{{ 'SHARED.BUTTONS.SAVE' | translate }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

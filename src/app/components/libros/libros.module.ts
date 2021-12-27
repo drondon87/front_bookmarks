@@ -7,9 +7,10 @@ import { DetalleLibroComponent } from './detalle-libro/detalle-libro.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaLibroCategoriaComponent } from './lista-libro-categoria/lista-libro-categoria.component';
+import { MarcaLibroComponent } from './marca-libro/marca-libro.component';
 
 @NgModule({
-  declarations: [ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent],
+  declarations: [ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent],
   imports: [
     CommonModule,
     LibrosRoutingModule,
@@ -18,7 +19,7 @@ import { ListaLibroCategoriaComponent } from './lista-libro-categoria/lista-libr
     ReactiveFormsModule
   ],
   exports:[
-    ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent
+    ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent
   ]
 })
 export class LibrosModule { }

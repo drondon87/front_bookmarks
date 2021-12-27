@@ -14,7 +14,10 @@
             "DELETE": "Delete",
             "SAVE": "Save",
             "CONSULT": "Consult",
-            "SEARCH": "Search"
+            "SEARCH": "Search",
+            "ADD_CHAPTER": "Add Chapter",
+            "ADD_BOOK_MARK": "Add Book Mark",
+            "BACK": "Back"
         }
     },
     "CATEGORY": {
@@ -39,11 +42,32 @@
         "DATE": "Date",
         "AUTHOR": "Author"
     },
+    "CHAPTERS": {
+        "CHAPTER_TITLE": "Chapters",
+        "CHAPTER_LIST": "Chapter List",
+        "NUMBER": "Number",
+        "NAME": "Name",
+        "ADD_CHAPTER_TITLE": "Add Chapter",
+        "CONSULT_CHAPTER_TITLE": "Consult Chapter",
+        "DESCRIPTION": "Description"
+    },
+    "BOOK_MARKS": {
+        "BOOK_MARK_TITLE": "Book Marks",
+        "ID": "Id",
+        "DESCRIPTION": "Description",
+        "ADD_BOOK_MARK_TITLE": "Add Book Mark",
+        "CONSULT_BOOK_MARK_TITLE": "Consult Book Mark",
+        "PAGES": "Pages",
+        "RESUME": "Resume"
+    },
     "VALIDATION": {
         "NAME_REQUIRED": "Name is required",
         "DESCRIPTION_REQUIRED": "Description is required",
         "NAME_CHARACTERS": "Name must be at least 4 characters",
         "DATE_REQUIRED": "Date is required",
-        "AUTHOR_REQUIRED": "Author is required"
+        "AUTHOR_REQUIRED": "Author is required",
+        "WARNING_LIST": "No registry exists",
+        "NUMBER_REQUIRED": "Number is required",
+        "PAGES_REQUIRED": "Pages is required"
     }
 }

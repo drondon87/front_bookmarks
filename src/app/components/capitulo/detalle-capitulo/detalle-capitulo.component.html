@@ -1,0 +1,63 @@
+<div class="card bg-dark text-white mt-2">
+    <div class="card-header text-center" *ngIf="!consulta">{{ "CHAPTERS.ADD_CHAPTER_TITLE" | translate}}</div>
+    <div class="card-header text-center" *ngIf="consulta"> {{ "CHAPTERS.CONSULT_CHAPTER_TITLE" | translate}} </div>
+    <div class="card-body">
+        <form [formGroup]="capituloForm" (ngSubmit)="guardarCapitulo()">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "CHAPTERS.NUMBER" | translate}} </label>
+                <input [class.is-invalid]="numero.invalid && numero.touched" type="text" formControlName="numero" class="form-control" required>
+                <small class="text-danger " *ngIf="numero.invalid && numero.touched ">{{ "VALIDATION.NUMBER_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "CHAPTERS.NAME" | translate}} </label>
+                <input [class.is-invalid]="nombre.invalid && nombre.touched" type="text" formControlName="nombre" class="form-control" required>
+                <small class="text-danger " *ngIf="nombre.invalid && nombre.touched ">{{ "VALIDATION.NAME_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "CHAPTERS.DESCRIPTION" | translate}} </label>
+                <textarea [class.is-invalid]="descripcion.invalid && descripcion.touched" class="form-control" formControlName="descripcion" required></textarea>
+                <small class="text-danger " *ngIf="descripcion.invalid && descripcion.touched ">{{ "VALIDATION.DESCRIPTION_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mt-3">
+                    <button type="submit" *ngIf="!consulta" [disabled]="capituloForm.invalid" class="btn btn-primary">{{ 'SHARED.BUTTONS.SAVE' | translate }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card border-primary mb-3 mt-2" *ngIf="consulta">
+    <div class="card-header"> {{ "BOOK_MARKS.BOOK_MARK_TITLE" | translate}} </div>
+    <div class="row mt-3" *ngIf="capituloId > 0">
+        <div class="col-2">
+            <button type="button" (click)="crearMarcaLibro()" class="btn btn-primary btn-sm">{{ "SHARED.BUTTONS.ADD_BOOK_MARK" | translate }}</button>
+        </div>
+    </div>
+    <div class="card-body text-primary">
+        <div *ngIf="marcasLibros?.length == 0" class="alert alert-info mt-3">
+            {{ "VALIDATION.WARNING_LIST" | translate }}
+        </div>
+        <table class="table table-bordered table-striped mt-3" *ngIf="marcasLibros?.length>0">
+            <thead>
+                <tr>
+                    <th class="text-center">{{ "BOOK_MARKS.ID" | translate }}</th>
+                    <th class="text-center">{{ "BOOK_MARKS.DESCRIPTION" | translate }}</th>
+                    <th class="text-center"> # </th>
+                    <th class="text-center"> # </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let marca of marcasLibros">
+                    <td class="text-center"> {{marca.id}} </td>
+                    <td class="text-center"> {{marca.descripcion}} </td>
+                    <td class="text-center">
+                        <button type="button" [routerLink]="['/libros/marcalibro/form',capituloId,marca.id]" class="btn btn-primary btn-sm">{{ "SHARED.BUTTONS.CONSULT" | translate }}</button>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" name="eliminar" class="btn btn-danger btn-sm" (click)="eliminarMarcaLibro(marca)">{{ "SHARED.BUTTONS.DELETE" | translate }}</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

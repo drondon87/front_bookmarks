@@ -14,7 +14,10 @@
             "DELETE": "Eliminar",
             "SAVE": "Guardar",
             "CONSULT": "Consultar",
-            "SEARCH": "Buscar"
+            "SEARCH": "Buscar",
+            "ADD_CHAPTER": "Crear Capítulo",
+            "ADD_BOOK_MARK": "Crear Marca Libro",
+            "BACK": "Volver"
         }
     },
     "CATEGORY": {
@@ -39,11 +42,32 @@
         "DATE": "Fecha",
         "AUTHOR": "Autor"
     },
+    "CHAPTERS": {
+        "CHAPTER_TITLE": "Capítulos",
+        "CHAPTER_LIST": "Lista Capítulos",
+        "NUMBER": "Número",
+        "NAME": "Nombre",
+        "ADD_CHAPTER_TITLE": "Crear Capítulo",
+        "CONSULT_CHAPTER_TITLE": "Consultar Capítulo",
+        "DESCRIPTION": "Descripción"
+    },
+    "BOOK_MARKS": {
+        "BOOK_MARK_TITLE": "Marcas de Libros",
+        "ID": "Id",
+        "DESCRIPTION": "Descripción",
+        "ADD_BOOK_MARK_TITLE": "Crear Marca Libro",
+        "CONSULT_BOOK_MARK_TITLE": "Consulta Marca Libro",
+        "PAGES": "Páginas",
+        "RESUME": "Resumen"
+    },
     "VALIDATION": {
         "NAME_REQUIRED": "Nombre es requerido",
         "DESCRIPTION_REQUIRED": "Descripción es requerido",
         "NAME_CHARACTERS": "Nombre debe tener la menos 4 caracteres",
         "DATE_REQUIRED": "Fecha es requerido",
-        "AUTHOR_REQUIRED": "Autor es requerido"
+        "AUTHOR_REQUIRED": "Autor es requerido",
+        "WARNING_LIST": "No existen registros actualmente",
+        "NUMBER_REQUIRED": "Número es requerido",
+        "PAGES_REQUIRED": "Páginas es requerido"
     }
 }
