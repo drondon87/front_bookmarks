@@ -4,6 +4,7 @@ import { MarcaLibroService } from '../../../services/marca-libro.service';
 import { MarcaLibro } from '../../../models/marcaLibro.model';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CreateMarcaLibro } from '../../../models/create.marcaLibro.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-marca-libro',
@@ -48,7 +49,7 @@ export class MarcaLibroComponent implements OnInit {
     this.marcaLibroForm = this.fb.group({
       descripcion: [{value:'' , disabled: this.consulta}, Validators.required],
       paginas: [{value:'' , disabled: this.consulta}, Validators.required],
-      capitulo: [{value:'' , disabled: this.consulta}, Validators.required],
+      capitulo: [{value:'' , disabled: true}, Validators.required],
       resumen: [{value:'' , disabled: this.consulta}] 
     });
   }
@@ -71,6 +72,19 @@ export class MarcaLibroComponent implements OnInit {
     this.createMarcaLibro.paginas = paginas;
     this.createMarcaLibro.resumen = resumen;
     this.createMarcaLibro.capituloId = this.capituloId;
+
+    this._marcaLibroService.crearMarcaLibro(this.createMarcaLibro)
+      .subscribe(marcaLibro => {
+        Swal.fire('Nueva Marca Libro', `La Marca ${marcaLibro.descripcion} ha sido creada con exito`,'success');
+        this.router.navigate(['capitulos/form',marcaLibro.capitulo.id]);
+      },
+      err => {
+        Swal.fire({
+          title: `Error ${err.error.status} !!!`,
+          text:  err.error.message,
+          icon: 'error'
+        })
+      });
   }
 
   public volver(): void {

@@ -16,10 +16,9 @@
                 <input [class.is-invalid]="paginas.invalid && paginas.touched" type="text" formControlName="paginas" class="form-control" required>
                 <small class="text-danger " *ngIf="paginas.invalid && paginas.touched ">{{ "VALIDATION.PAGES_REQUIRED" | translate}}</small>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" *ngIf="consulta">
                 <label class="col-form-label col-sm-2">{{ "CHAPTERS.CHAPTER_TITLE" | translate}} </label>
                 <input [class.is-invalid]="capitulo.invalid && capitulo.touched" type="text" formControlName="capitulo" class="form-control" required>
-                <small class="text-danger " *ngIf="capitulo.invalid && capitulo.touched ">{{ "VALIDATION.PAGES_REQUIRED" | translate}}</small>
             </div>
             <div class="form-group row">
                 <label class="col-form-label col-sm-2">{{ "BOOK_MARKS.RESUME" | translate}} </label>

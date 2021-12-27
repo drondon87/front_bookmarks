@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { MarcaLibro } from '../models/marcaLibro.model';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { CreateMarcaLibro } from '../models/create.marcaLibro.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,15 @@ export class MarcaLibroService {
     return this.http.get(`${this.urlEndpoint}/marcaLibro/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as MarcaLibro ),
+      catchError(err => {
+        return throwError(err);
+      })
+    );
+  }
+
+  public crearMarcaLibro(createMarcaLibro: CreateMarcaLibro): Observable<MarcaLibro> {
+    return this.http.post(`${this.urlEndpoint}/marcaLibro`, createMarcaLibro).pipe(
+      map((resp: any) => resp['data'] as MarcaLibro),
       catchError(err => {
         return throwError(err);
       })
