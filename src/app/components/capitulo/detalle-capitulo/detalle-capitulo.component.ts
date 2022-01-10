@@ -7,6 +7,7 @@ import { CapituloService } from '../../../services/capitulo.service';
 import Swal from 'sweetalert2';
 import { MarcaLibro } from '../../../models/marcaLibro.model';
 import { MarcaLibroService } from '../../../services/marca-libro.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-detalle-capitulo',
@@ -33,7 +34,8 @@ export class DetalleCapituloComponent implements OnInit {
               private fb: FormBuilder,
               private router: Router,
               private _capituloService: CapituloService,
-              private _marcaLibroService: MarcaLibroService) { }
+              private _marcaLibroService: MarcaLibroService,
+              private _translateService: TranslateService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -91,6 +93,7 @@ export class DetalleCapituloComponent implements OnInit {
       numero: capitulo.numero
     });
     this.capituloId = capitulo.id;
+    this.capitulo = capitulo;
   }
 
   public eliminarMarcaLibro(marcaLibro: MarcaLibro){
@@ -112,6 +115,31 @@ export class DetalleCapituloComponent implements OnInit {
             `${resp}`,
             'success'
           )
+        });
+        
+      }
+    })
+  }
+
+  eliminarCapitulo(){
+    Swal.fire({
+      title: this._translateService.instant('DIALOG.DELETE_TITLE'),
+      text: `${this._translateService.instant('DIALOG.CHAPTER_DELETE_ASK')} ${this.capitulo.nombre} ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: this._translateService.instant('DIALOG.DELETE_YES'),
+      cancelButtonText: this._translateService.instant('DIALOG.DELETE_NO'),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._capituloService.borrarCapitulo(this.capitulo.id).subscribe(resp => {
+          Swal.fire(
+            this._translateService.instant('DIALOG.CHAPTER_DELETED'),
+            `${resp}`,
+            'success'
+          )
+          this.router.navigate(['/capitulos']);
         });
         
       }

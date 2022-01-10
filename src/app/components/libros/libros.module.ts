@@ -8,9 +8,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaLibroCategoriaComponent } from './lista-libro-categoria/lista-libro-categoria.component';
 import { MarcaLibroComponent } from './marca-libro/marca-libro.component';
+import { ListaCitaLibroComponent } from './lista-cita-libro/lista-cita-libro.component';
+import { DetalleCitaLibroComponent } from './detalle-cita-libro/detalle-cita-libro.component';
 
 @NgModule({
-  declarations: [ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent],
+  declarations: [ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent, DetalleCitaLibroComponent],
   imports: [
     CommonModule,
     LibrosRoutingModule,

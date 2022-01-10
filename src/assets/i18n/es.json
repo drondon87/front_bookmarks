@@ -69,5 +69,19 @@
         "WARNING_LIST": "No existen registros actualmente",
         "NUMBER_REQUIRED": "Número es requerido",
         "PAGES_REQUIRED": "Páginas es requerido"
+    },
+    "DIALOG": {
+        "DELETE_TITLE": "¿Está seguro?",
+        "DELETE_YES": "Sí, eliminar!",
+        "DELETE_NO": "No, cancelar",
+        "CHAPTER_DELETE_ASK": "¿Seguro que desea eliminar el capítulo ",
+        "CHAPTER_DELETED": "Capítulo Eliminado!",
+        "CATEGORY_DELETE_ASK": "¿Seguro que desea eliminar la categoria ",
+        "CATEGORY_DELETED": "Categoría Eliminada!",
+        "CATEGORY_ADD": "Nueva Categoría",
+        "ADDED_SUCCESSFUL": " ha sido creado exitosamente!!!",
+        "CATEGORY_ADD_TEXT": "La categoría ",
+        "BOOK_DELETE_ASK": "¿Seguro que desea eliminar el libro ",
+        "BOOK_DELETED": "Libro Eliminado!"
     }
 }

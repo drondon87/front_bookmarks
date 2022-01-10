@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../../../models/categoria.model';
 import { CategoriaService } from '../../../services/categoria.service';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-categoria',
@@ -12,7 +13,8 @@ export class ListaCategoriaComponent implements OnInit {
 
   public categorias: Categoria[] = [];
 
-  constructor(private _categoriaService: CategoriaService) { }
+  constructor(private _categoriaService: CategoriaService,
+              private _translateService: TranslateService) { }
 
   ngOnInit(): void {
     this._categoriaService.getCategorias().subscribe(resp => this.categorias = resp);
@@ -20,20 +22,20 @@ export class ListaCategoriaComponent implements OnInit {
 
   public eliminarCategoria(categoria: Categoria): void {
     Swal.fire({
-      title: 'Está seguro?',
-      text: `¿Seguro que desea eliminar la categoria ${categoria.nombre} ?`,
+      title: this._translateService.instant('DIALOG.DELETE_TITLE'),
+      text: `${this._translateService.instant('DIALOG.CATEGORY_DELETE_ASK')} ${categoria.nombre} ?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminar!',
-      cancelButtonText:'No, cancelar',
+      confirmButtonText: this._translateService.instant('DIALOG.DELETE_YES'),
+      cancelButtonText: this._translateService.instant('DIALOG.DELETE_NO'),
     }).then((result) => {
       if (result.isConfirmed) {
         this._categoriaService.borrarCategoria(categoria.id).subscribe(resp => {
           this.categorias = this.categorias.filter(cat => cat != categoria);
           Swal.fire(
-            'Categoria Eliminada!',
+            this._translateService.instant('DIALOG.CATEGORY_DELETED'),
             `${resp}`,
             'success'
           )

@@ -6,6 +6,7 @@ import { ListaCapituloComponent } from './lista-capitulo/lista-capitulo.componen
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetalleCapituloComponent } from './detalle-capitulo/detalle-capitulo.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DetalleCapituloComponent } from './detalle-capitulo/detalle-capitulo.co
     CapituloRoutingModule,
     TranslateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgGridModule
   ],
   exports:[ListaCapituloComponent, DetalleCapituloComponent]
 })

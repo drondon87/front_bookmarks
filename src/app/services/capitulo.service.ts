@@ -25,6 +25,16 @@ export class CapituloService {
     );
   }
 
+  public getCapitulosByLibroAndPage(id: number, page: number) : Observable<any[]>  {
+    return this.http.get(`${this.urlEndpoint}/capitulo/libro/${id}/page/${page}`)
+    .pipe(
+      map((resp: any) => resp['data']),
+      catchError(err => {
+        return throwError(err);
+      })
+    );
+  }
+
   public borrarCapitulo(id: number): Observable<string> {
     return this.http.delete(`${this.urlEndpoint}/capitulo/${id}`)
     .pipe(

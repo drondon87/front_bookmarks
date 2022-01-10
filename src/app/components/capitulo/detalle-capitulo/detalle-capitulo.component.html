@@ -21,6 +21,7 @@
             <div class="form-group row">
                 <div class="col-sm-6 mt-3">
                     <button type="submit" *ngIf="!consulta" [disabled]="capituloForm.invalid" class="btn btn-primary">{{ 'SHARED.BUTTONS.SAVE' | translate }}</button>
+                    <button type="button" *ngIf="consulta" class="btn btn-danger" (click)="eliminarCapitulo()">{{ 'SHARED.BUTTONS.DELETE' | translate }}</button>
                 </div>
             </div>
         </form>

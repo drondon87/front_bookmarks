@@ -13,14 +13,18 @@
             </div>
             <div class="row mt-3" *ngIf="libroId > 0">
                 <div class="col-2">
-                    <button type="button" (click)="crearCapitulo()" class="btn btn-primary btn-sm">{{ "SHARED.BUTTONS.ADD_CHAPTER" | translate }}</button>
+                    <button type="button" (click)="crearCapitulo()" class="btn btn-primary btn-sm mb-2">{{ "SHARED.BUTTONS.ADD_CHAPTER" | translate }}</button>
                 </div>
             </div>
-            <div *ngIf="capitulos?.length == 0" class="alert alert-info mt-3">
+            <div *ngIf="capitulos?.length == 0" class="alert alert-info mt-3 mb-2">
                 {{ "VALIDATION.WARNING_LIST" | translate }}
             </div>
+            <div *ngIf="rowData?.length>0">
+                <ag-grid-angular style="width: 90%; height: 500px;" class="ag-theme-balham" (gridReady)="onGridReady($event)" [rowData]="rowData" [columnDefs]="columnDefs" [pagination]="true" [rowSelection]="rowSelection" (selectionChanged)="onSelectionChanged($event)">
+                </ag-grid-angular>
+            </div>
 
-            <table class="table table-bordered table-striped mt-3" *ngIf="capitulos?.length>0">
+            <!-- <table class="table table-bordered table-striped mt-3" *ngIf="capitulos?.length>0">
                 <thead>
                     <tr>
                         <th class="text-center">{{ "CHAPTERS.NUMBER" | translate }}</th>
@@ -41,7 +45,8 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
+            <!-- <app-paginator *ngIf="paginador" [paginador]="paginador"></app-paginator> -->
         </div>
     </div>
 </div>

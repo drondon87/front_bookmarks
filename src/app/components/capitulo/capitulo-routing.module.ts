@@ -8,6 +8,9 @@ const routes: Routes = [
     path: '', component: ListaCapituloComponent
   },
   {
+    path: 'page/:page', component: ListaCapituloComponent
+  },
+  {
     path: 'form/libro/:libroId', component: DetalleCapituloComponent
   },
   {

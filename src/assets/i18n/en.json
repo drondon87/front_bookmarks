@@ -69,5 +69,19 @@
         "WARNING_LIST": "No registry exists",
         "NUMBER_REQUIRED": "Number is required",
         "PAGES_REQUIRED": "Pages is required"
+    },
+    "DIALOG": {
+        "DELETE_TITLE": "Are you sure?",
+        "DELETE_YES": "Delete!",
+        "DELETE_NO": "Cancel",
+        "CHAPTER_DELETE_ASK": "Are you sure do you want delete this chapter  ",
+        "CHAPTER_DELETED": "Chapter deleted!",
+        "CATEGORY_DELETE_ASK": "Are you sure do you want delete this category ",
+        "CATEGORY_DELETED": "Category deleted!",
+        "CATEGORY_ADD": "Add Category",
+        "ADDED_SUCCESSFUL": " has been successfully created!!!",
+        "CATEGORY_ADD_TEXT": "The category ",
+        "BOOK_DELETE_ASK": "Are you sure do you want delete this book  ",
+        "BOOK_DELETED": "Book deleted!"
     }
 }

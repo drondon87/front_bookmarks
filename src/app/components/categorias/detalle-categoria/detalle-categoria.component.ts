@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriaService } from '../../../services/categoria.service';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-detalle-categoria',
@@ -19,7 +20,8 @@ export class DetalleCategoriaComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private _categoriaService: CategoriaService,
-              private router: Router) { }
+              private router: Router,
+              private _translateService: TranslateService) { }
 
   get nombre(){ return this.categoriaForm.get('nombre'); }
 
@@ -62,7 +64,7 @@ export class DetalleCategoriaComponent implements OnInit {
 
     this._categoriaService.crearCategoria(this.categoria)
       .subscribe(categoria => {
-        Swal.fire('Nueva Categoria', `La categoría ${categoria.nombre} ha sido creada con exito`,'success');
+        Swal.fire(this._translateService.instant('DIALOG.CATEGORY_ADD'), `${this._translateService.instant('DIALOG.CATEGORY_ADD_TEXT')} ${categoria.nombre} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`,'success');
         this.router.navigate(['/categorias']);
       },
       err => {
