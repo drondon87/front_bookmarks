@@ -5,6 +5,7 @@ import { MarcaLibro } from '../../../models/marcaLibro.model';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CreateMarcaLibro } from '../../../models/create.marcaLibro.model';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-marca-libro',
@@ -22,7 +23,8 @@ export class MarcaLibroComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private _marcaLibroService: MarcaLibroService,
               private fb: FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private _translateService: TranslateService) { }
   
   get descripcion(){ return this.marcaLibroForm.get('descripcion'); }
 
@@ -39,7 +41,10 @@ export class MarcaLibroComponent implements OnInit {
       let id:number = +params.get('id');
       if(id !== 0){
         this.consulta = true;
-        this._marcaLibroService.obtenerMarcaLibro(id).subscribe(marcaLibro => this.asignarValores(marcaLibro));
+        this._marcaLibroService.obtenerMarcaLibro(id).subscribe(marcaLibro => {
+          this.marcaLibro = marcaLibro;
+          this.asignarValores(marcaLibro);
+        });
       }
     });
     this.initForm();
@@ -75,13 +80,13 @@ export class MarcaLibroComponent implements OnInit {
 
     this._marcaLibroService.crearMarcaLibro(this.createMarcaLibro)
       .subscribe(marcaLibro => {
-        Swal.fire('Nueva Marca Libro', `La Marca ${marcaLibro.descripcion} ha sido creada con exito`,'success');
+        Swal.fire(this._translateService.instant('DIALOG.BOOK_MARK_ADD'), `${this._translateService.instant('DIALOG.BOOK_MARK_ADD_TEXT')} ${marcaLibro.descripcion} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`,'success');
         this.router.navigate(['capitulos/form',marcaLibro.capitulo.id]);
       },
       err => {
         Swal.fire({
-          title: `Error ${err.error.status} !!!`,
-          text:  err.error.message,
+          title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+          text:  err.error.error,
           icon: 'error'
         })
       });
@@ -89,6 +94,39 @@ export class MarcaLibroComponent implements OnInit {
 
   public volver(): void {
     this.router.navigate(['capitulos/form', this.capituloId]);
+  }
+
+  public eliminarMarcaLibro(){
+    console.log(this.marcaLibro);
+    Swal.fire({
+      title: this._translateService.instant('DIALOG.DELETE_TITLE'),
+      text: `${this._translateService.instant('DIALOG.BOOK_MARK_DELETE_ASK')} ${this.marcaLibro.descripcion} ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: this._translateService.instant('DIALOG.DELETE_YES'),
+      cancelButtonText: this._translateService.instant('DIALOG.DELETE_NO'),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._marcaLibroService.borrarMarcaLibro(this.marcaLibro.id).subscribe(resp => {
+          Swal.fire(
+            this._translateService.instant('DIALOG.BOOK_MARK_DELETED'),
+            `${resp}`,
+            'success'
+          )
+          this.router.navigate(['capitulos/form', this.capituloId]);
+        },
+        err => {
+          Swal.fire({
+            title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+            text:  err.error.error,
+            icon: 'error'
+          })
+        });
+        
+      }
+    })
   }
 
 }

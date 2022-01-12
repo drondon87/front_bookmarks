@@ -8,6 +8,7 @@ import { LibroService } from '../../../services/libro.service';
 import Swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
 import { formatDate } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-detalle-libro',
@@ -26,7 +27,8 @@ export class DetalleLibroComponent implements OnInit {
               private _categoriaService: CategoriaService,
               private _libroService: LibroService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private _translateService: TranslateService) { }
 
   get nombre(){ return this.libroForm.get('nombre'); }
 
@@ -84,13 +86,13 @@ export class DetalleLibroComponent implements OnInit {
 
     this._libroService.crearLibro(this.createLibro)
     .subscribe(libro => {
-      Swal.fire('Nuevo Libro', `El libro ${libro.nombre} ha sido creado con exito`,'success');
+      Swal.fire(this._translateService.instant('DIALOG.BOOK_ADD'), `${this._translateService.instant('DIALOG.BOOK_ADD_TEXT')} ${libro.nombre} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`,'success');
       this.router.navigate(['/libros']);
     },
     err => {
       Swal.fire({
-        title: `Error ${err.error.status} !!!`,
-        text:  err.error.message,
+        title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+        text:  err.error.error,
         icon: 'error'
       })
     }

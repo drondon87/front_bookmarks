@@ -38,27 +38,9 @@
         <div *ngIf="marcasLibros?.length == 0" class="alert alert-info mt-3">
             {{ "VALIDATION.WARNING_LIST" | translate }}
         </div>
-        <table class="table table-bordered table-striped mt-3" *ngIf="marcasLibros?.length>0">
-            <thead>
-                <tr>
-                    <th class="text-center">{{ "BOOK_MARKS.ID" | translate }}</th>
-                    <th class="text-center">{{ "BOOK_MARKS.DESCRIPTION" | translate }}</th>
-                    <th class="text-center"> # </th>
-                    <th class="text-center"> # </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let marca of marcasLibros">
-                    <td class="text-center"> {{marca.id}} </td>
-                    <td class="text-center"> {{marca.descripcion}} </td>
-                    <td class="text-center">
-                        <button type="button" [routerLink]="['/libros/marcalibro/form',capituloId,marca.id]" class="btn btn-primary btn-sm">{{ "SHARED.BUTTONS.CONSULT" | translate }}</button>
-                    </td>
-                    <td class="text-center">
-                        <button type="button" name="eliminar" class="btn btn-danger btn-sm" (click)="eliminarMarcaLibro(marca)">{{ "SHARED.BUTTONS.DELETE" | translate }}</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div *ngIf="rowData?.length>0">
+            <ag-grid-angular style="width: 90%; height: 500px;" class="ag-theme-balham" (gridReady)="onGridReady($event)" [rowData]="rowData" [columnDefs]="columnDefs" [pagination]="true" [rowSelection]="rowSelection" (selectionChanged)="onSelectionChanged($event)">
+            </ag-grid-angular>
+        </div>
     </div>
 </div>

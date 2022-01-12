@@ -69,8 +69,8 @@ export class DetalleCategoriaComponent implements OnInit {
       },
       err => {
         Swal.fire({
-          title: `Error ${err.error.status} !!!`,
-          text:  err.error.message,
+          title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+          text:  err.error.error,
           icon: 'error'
         })
       }

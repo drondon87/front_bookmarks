@@ -4,7 +4,8 @@
         "BOOKS_MENU": "Books",
         "CHRONOLOGY_MENU": "Chronology",
         "BOOKS_CATEGOY_MENU": "Books by Category",
-        "CHAPTERS_MENU": "Chapters"
+        "CHAPTERS_MENU": "Chapters",
+        "BOOKS_DATE_MENU": "Books Date"
     },
     "SHARED": {
         "BUTTONS": {
@@ -60,6 +61,10 @@
         "PAGES": "Pages",
         "RESUME": "Resume"
     },
+    "BOOK_DATES": {
+        "BOOK_DATE_TITLE": "Book Dates",
+        "BOOK_DATE_LIST": "Book Dates List"
+    },
     "VALIDATION": {
         "NAME_REQUIRED": "Name is required",
         "DESCRIPTION_REQUIRED": "Description is required",
@@ -82,6 +87,14 @@
         "ADDED_SUCCESSFUL": " has been successfully created!!!",
         "CATEGORY_ADD_TEXT": "The category ",
         "BOOK_DELETE_ASK": "Are you sure do you want delete this book  ",
-        "BOOK_DELETED": "Book deleted!"
+        "BOOK_DELETED": "Book deleted!",
+        "BOOK_ADD": "Add Book",
+        "BOOK_ADD_TEXT": "The book ",
+        "BOOK_MARK_ADD": "Add Book Mark",
+        "BOOK_MARK_ADD_TEXT": "The Book Mark",
+        "ERROR_TITLE": "Error !!!",
+        "BOOK_MARK_DELETE_ASK": "Are you sure do you want delete this book mark ",
+        "BOOK_MARK_DELETED": "Book Mark deleted!"
+
     }
 }

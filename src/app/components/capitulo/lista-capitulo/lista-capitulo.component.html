@@ -23,30 +23,6 @@
                 <ag-grid-angular style="width: 90%; height: 500px;" class="ag-theme-balham" (gridReady)="onGridReady($event)" [rowData]="rowData" [columnDefs]="columnDefs" [pagination]="true" [rowSelection]="rowSelection" (selectionChanged)="onSelectionChanged($event)">
                 </ag-grid-angular>
             </div>
-
-            <!-- <table class="table table-bordered table-striped mt-3" *ngIf="capitulos?.length>0">
-                <thead>
-                    <tr>
-                        <th class="text-center">{{ "CHAPTERS.NUMBER" | translate }}</th>
-                        <th class="text-center">{{ "CHAPTERS.NAME" | translate }}</th>
-                        <th class="text-center"> # </th>
-                        <th class="text-center"> # </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let capitulo of capitulos">
-                        <td class="text-center"> {{capitulo.numero}} </td>
-                        <td class="text-center"> {{capitulo.nombre}} </td>
-                        <td class="text-center">
-                            <button type="button" [routerLink]="['/capitulos/form',capitulo.id]" class="btn btn-primary btn-sm">{{ "SHARED.BUTTONS.CONSULT" | translate }}</button>
-                        </td>
-                        <td class="text-center">
-                            <button type="button" name="eliminar" class="btn btn-danger btn-sm" (click)="eliminarCapitulo(capitulo)">{{ "SHARED.BUTTONS.DELETE" | translate }}</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table> -->
-            <!-- <app-paginator *ngIf="paginador" [paginador]="paginador"></app-paginator> -->
         </div>
     </div>
 </div>

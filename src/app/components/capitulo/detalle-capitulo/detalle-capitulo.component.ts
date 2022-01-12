@@ -23,6 +23,9 @@ export class DetalleCapituloComponent implements OnInit {
   public libroId: number = 0;
   public marcasLibros: MarcaLibro[] = [];
   public capituloId: number = 0;
+  public rowSelection = 'single';
+  public gridApi;
+  public gridColumnApi;
 
   get numero(){ return this.capituloForm.get('numero'); }
 
@@ -37,6 +40,13 @@ export class DetalleCapituloComponent implements OnInit {
               private _marcaLibroService: MarcaLibroService,
               private _translateService: TranslateService) { }
 
+  public columnDefs = [
+    {headerName: this._translateService.instant('BOOK_MARKS.ID'), field: 'id', sortable:true},
+    {headerName: this._translateService.instant('BOOK_MARKS.DESCRIPTION'), field: 'descripcion', sortable:true}
+  ];
+  
+  public rowData = [];
+
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       let libroId:number = +params.get('libroId');
@@ -48,7 +58,10 @@ export class DetalleCapituloComponent implements OnInit {
         this.consulta=true;
 
         this._capituloService.obtenerCapitulo(id).subscribe(capitulo => this.asignarValores(capitulo));
-        this._marcaLibroService.getMarcasLibrosByCapitulo(id).subscribe(marcas => this.marcasLibros = marcas);
+        this._marcaLibroService.getMarcasLibrosByCapitulo(id).subscribe(marcas => {
+          this.marcasLibros = marcas;
+          this.rowData = this.marcasLibros;
+        });
       }
     });
     this.initForm();
@@ -96,31 +109,6 @@ export class DetalleCapituloComponent implements OnInit {
     this.capitulo = capitulo;
   }
 
-  public eliminarMarcaLibro(marcaLibro: MarcaLibro){
-    Swal.fire({
-      title: 'Está seguro?',
-      text: `¿Seguro que desea eliminar la marca ${marcaLibro.descripcion} ?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminar!',
-      cancelButtonText:'No, cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this._marcaLibroService.borrarMarcaLibro(marcaLibro.id).subscribe(resp => {
-          this.marcasLibros = this.marcasLibros.filter(mar => mar != marcaLibro);
-          Swal.fire(
-            'Marca Libro Eliminada!',
-            `${resp}`,
-            'success'
-          )
-        });
-        
-      }
-    })
-  }
-
   eliminarCapitulo(){
     Swal.fire({
       title: this._translateService.instant('DIALOG.DELETE_TITLE'),
@@ -140,13 +128,31 @@ export class DetalleCapituloComponent implements OnInit {
             'success'
           )
           this.router.navigate(['/capitulos']);
+        },
+        err => {
+          Swal.fire({
+            title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+            text:  err.error.error,
+            icon: 'error'
+          })
         });
-        
       }
     })
   }
 
   public crearMarcaLibro(): void {
     this.router.navigate(['/libros/marcalibro/form/capitulo/',this.capituloId]);
+  }
+
+  public onSelectionChanged(event) {
+    let selectedRows = this.gridApi.getSelectedRows();
+    let idMarcaLibro: number = selectedRows[0].id;
+    let capituloId: number = selectedRows[0].capitulo.id;
+    this.router.navigate(['/libros/marcalibro/form/',capituloId,idMarcaLibro]);
+  }
+
+  public onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
   }
 }

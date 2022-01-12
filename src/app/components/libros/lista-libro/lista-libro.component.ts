@@ -39,6 +39,13 @@ export class ListaLibroComponent implements OnInit {
             `${resp}`,
             'success'
           )
+        },
+        err => {
+          Swal.fire({
+            title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+            text:  err.error.error,
+            icon: 'error'
+          })
         });
         
       }
