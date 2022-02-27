@@ -5,6 +5,7 @@ import { DetalleLibroComponent } from './detalle-libro/detalle-libro.component';
 import { ListaLibroCategoriaComponent } from './lista-libro-categoria/lista-libro-categoria.component';
 import { MarcaLibroComponent } from './marca-libro/marca-libro.component';
 import { ListaCitaLibroComponent } from './lista-cita-libro/lista-cita-libro.component';
+import { DetalleCitaLibroComponent } from './detalle-cita-libro/detalle-cita-libro.component';
 
 const routes: Routes = [ {
   path: '', component: ListaLibroComponent
@@ -26,6 +27,12 @@ const routes: Routes = [ {
 },
 {
   path: 'citaslibro', component: ListaCitaLibroComponent
+},
+{
+  path: 'citaLibro/form/libro/:libroId', component: DetalleCitaLibroComponent
+},
+{
+  path: 'citaLibro/form/:id', component: DetalleCitaLibroComponent
 }];
 
 @NgModule({

@@ -1,25 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/categorias">{{ 'MENU.CATEGORY_MENU' | translate }} </a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/libros">{{ 'MENU.BOOKS_MENU' | translate }}</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/cronologias">{{ 'MENU.CHRONOLOGY_MENU' | translate }}</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/libros/categoria">{{ 'MENU.BOOKS_CATEGOY_MENU' | translate }}</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/capitulos">{{ 'MENU.CHAPTERS_MENU' | translate }}</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/libros/citaslibro">{{ 'MENU.BOOKS_DATE_MENU' | translate }}</a>
-            </li>
-        </ul>
+<header>
+    <div class="container__menu">
+        <div class="menu">
+            <input type="checkbox" id="check__menu">
+            <label for="check__menu" id="label__check">
+                <div class="imagen__menu icon__menu"></div>
+            </label>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#"></a>
+                    </li>
+                    <li><a routerLink="/categorias">{{ 'MENU.CATEGORY_MENU' | translate }}</a></li>
+                    <li>
+                        <a routerLink="/libros">{{ 'MENU.BOOKS_MENU' | translate }}</a>
+                        <ul>
+                            <li><a routerLink="/libros/categoria">{{ 'MENU.BOOKS_CATEGOY_MENU' | translate }}</a></li>
+                            <li><a routerLink="/libros/citaslibro">{{ 'MENU.BOOKS_DATE_MENU' | translate }}</a></li>
+                        </ul>
+                    </li>
+                    <li><a routerLink="/cronologias">{{ 'MENU.CHRONOLOGY_MENU' | translate }}</a></li>
+                    <li><a routerLink="/capitulos">{{ 'MENU.CHAPTERS_MENU' | translate }}</a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
-</nav>
+</header>

@@ -33,4 +33,34 @@ export class CitaLibroService {
       })
     );
   }
+
+  public borrarCitaLibro(id: number): Observable<string> {
+    return this.http.delete(`${this.urlEndpoint}/citalibro/${id}`)
+    .pipe(
+      map((resp: any) => resp['message'] as string ),
+      catchError(err => {
+        return throwError(err);
+      })
+    );
+  }
+
+  public buscarCitasLibrosByLibro(id: number) : Observable<CitaLibro[]>  {
+    return this.http.get(`${this.urlEndpoint}/citalibro/libro/${id}`)
+    .pipe(
+      map((resp: any) => resp['data'] as CitaLibro[] ),
+      catchError(err => {
+        return throwError(err);
+      })
+    );
+  }
+
+  public buscarCitasLibros() : Observable<CitaLibro[]>  {
+    return this.http.get(`${this.urlEndpoint}/citalibro`)
+    .pipe(
+      map((resp: any) => resp['data'] as CitaLibro[] ),
+      catchError(err => {
+        return throwError(err);
+      })
+    );
+  }
 }

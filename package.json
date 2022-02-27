@@ -26,6 +26,7 @@
         "@ngrx/store-devtools": "^10.1.2",
         "@ngx-translate/core": "^12.1.2",
         "@ngx-translate/http-loader": "^6.0.0",
+        "@swimlane/ngx-datatable": "^20.0.0",
         "ag-grid-angular": "^25.2.0",
         "ag-grid-community": "^25.2.1",
         "bootstrap": "^5.1.3",

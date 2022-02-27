@@ -10,6 +10,7 @@ import { ListaLibroCategoriaComponent } from './lista-libro-categoria/lista-libr
 import { MarcaLibroComponent } from './marca-libro/marca-libro.component';
 import { ListaCitaLibroComponent } from './lista-cita-libro/lista-cita-libro.component';
 import { DetalleCitaLibroComponent } from './detalle-cita-libro/detalle-cita-libro.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent, DetalleCitaLibroComponent],
@@ -18,10 +19,11 @@ import { DetalleCitaLibroComponent } from './detalle-cita-libro/detalle-cita-lib
     LibrosRoutingModule,
     TranslateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgGridModule
   ],
   exports:[
-    ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent
+    ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent, DetalleCitaLibroComponent
   ]
 })
 export class LibrosModule { }

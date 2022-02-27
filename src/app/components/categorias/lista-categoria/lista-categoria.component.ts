@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Categoria } from '../../../models/categoria.model';
 import { CategoriaService } from '../../../services/categoria.service';
 import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-categoria',
@@ -11,13 +13,41 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ListaCategoriaComponent implements OnInit {
 
+  @ViewChild('editTmpl', { static: true }) editTmpl: TemplateRef<any>;
+  @ViewChild('hdrTpl', { static: true }) hdrTpl: TemplateRef<any>;
+
+  public data = [];
+  public cols = [];
+  public selected = [];
+  public SelectionType = SelectionType;
+  public ColumnMode = ColumnMode;
   public categorias: Categoria[] = [];
 
   constructor(private _categoriaService: CategoriaService,
-              private _translateService: TranslateService) { }
+              private _translateService: TranslateService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this._categoriaService.getCategorias().subscribe(resp => this.categorias = resp);
+    this.initColumnsTable();
+    this._categoriaService.getCategorias().subscribe(resp => {
+      this.categorias = resp;
+      this.data = resp;
+    });
+  }
+
+  public initColumnsTable(): void {
+    this.cols = [
+      {
+        cellTemplate: this.editTmpl,
+        headerTemplate: this.hdrTpl,
+        name: 'id'
+      },
+      {
+        cellTemplate: this.editTmpl,
+        headerTemplate: this.hdrTpl,
+        name: 'nombre'
+      }
+    ];
   }
 
   public eliminarCategoria(categoria: Categoria): void {
@@ -51,6 +81,10 @@ export class ListaCategoriaComponent implements OnInit {
       }
     })
 
+  }
+
+  onSelect({ selected }) {
+    this.router.navigate(['/categorias/form/',selected[0].id]);
   }
 
 }

@@ -1,4 +1,4 @@
-<div class="card border-primary mb-3 mt-2">
+<!-- <div class="card border-primary mb-3 mt-2">
     <div class="card-header"> {{ "CATEGORY.CATEGORY_TITLE" | translate}} </div>
     <div class="card-body text-primary">
         <h5 class="card-title">{{ "CATEGORY.CATEGORY_LIST" | translate }}</h5>
@@ -28,4 +28,23 @@
             </tbody>
         </table>
     </div>
+</div> -->
+<div class="card mb-3">
+    <div class="card-header text-center bg-card text-white"> {{ "CATEGORY.CATEGORY_TITLE" | translate}} </div>
+    <div class="card-body txt-content">
+        <h5 class="card-title">{{ "CATEGORY.CATEGORY_LIST" | translate }}</h5>
+        <div class="mb-3 form__content-submit">
+            <button type="button" class="form__submit" routerLink="/categorias/form">{{ "SHARED.BUTTONS.ADD_CATEGORY" | translate }}</button>
+        </div>
+        <ngx-datatable class="material" [rows]="data" [columns]="cols" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [selected]="selected" [selectionType]="SelectionType.single" (select)="onSelect($event)">
+        </ngx-datatable>
+        <ng-template #hdrTpl let-column="column">{{ column.name }}</ng-template>
+        <ng-template #editTmpl let-row="row" let-column="column" let-value="value">
+            <ng-container>
+                {{ value }}
+            </ng-container>
+
+        </ng-template>
+    </div>
+
 </div>

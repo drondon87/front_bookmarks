@@ -1,0 +1,12 @@
+<div>
+    <ngx-datatable class="material" [rows]="data" [columns]="cols" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="3" [selected]="selected" [selectionType]="SelectionType.single" (select)="onSelect($event)">
+    </ngx-datatable>
+    <ng-template #hdrTpl let-column="column">{{ column.name }}</ng-template>
+    <ng-template #editTmpl let-row="row" let-column="column" let-value="value">
+        <img class="video-image" [src]="value" *ngIf="column.name === 'imagen'">
+        <ng-container *ngIf="column.name !== 'imagen'">
+            {{ value }}
+        </ng-container>
+
+    </ng-template>
+</div>

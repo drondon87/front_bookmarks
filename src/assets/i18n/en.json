@@ -18,6 +18,7 @@
             "SEARCH": "Search",
             "ADD_CHAPTER": "Add Chapter",
             "ADD_BOOK_MARK": "Add Book Mark",
+            "ADD_BOOK_DATE": "Add Book Mark",
             "BACK": "Back"
         }
     },
@@ -63,7 +64,9 @@
     },
     "BOOK_DATES": {
         "BOOK_DATE_TITLE": "Book Dates",
-        "BOOK_DATE_LIST": "Book Dates List"
+        "BOOK_DATE_LIST": "Book Dates List",
+        "ADD_BOOK_DATE_TITLE": "Add Book Date",
+        "AUTHOR": "Author"
     },
     "VALIDATION": {
         "NAME_REQUIRED": "Name is required",

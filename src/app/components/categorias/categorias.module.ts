@@ -6,19 +6,22 @@ import { ListaCategoriaComponent } from './lista-categoria/lista-categoria.compo
 import { DetalleCategoriaComponent } from './detalle-categoria/detalle-categoria.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListVideosComponent } from './list-videos/list-videos.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
-  declarations: [ListaCategoriaComponent, DetalleCategoriaComponent],
+  declarations: [ListaCategoriaComponent, DetalleCategoriaComponent, ListVideosComponent],
   imports: [
     CommonModule,
     CategoriasRoutingModule,
     TranslateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxDatatableModule
   ],
   exports: [
-    ListaCategoriaComponent, DetalleCategoriaComponent
+    ListaCategoriaComponent, DetalleCategoriaComponent, ListVideosComponent
   ]
 })
 export class CategoriasModule { }
