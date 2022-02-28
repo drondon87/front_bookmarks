@@ -1,0 +1,52 @@
+:root {
+    --bg-color: #023877;
+    --hover-color-btn: #0074C7;
+    --disable-color-btn: #8ab4d1de;
+}
+
+.bg-card {
+    background: var(--bg-color);
+    font-size: 18px;
+}
+
+.form__content-submit {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.form__submit {
+    display: block;
+    width: 20%;
+    font-size: 18px;
+    background: var(--bg-color);
+    padding: 10px 20px;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+.form__submit:hover {
+    background: var(--hover-color-btn);
+}
+
+@media screen and (max-width:425px) {
+    label {
+        text-align: center;
+        font-size: 1rem;
+    }
+    small {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+    .form__content-submit {
+        justify-content: center;
+    }
+    .form__submit {
+        width: 100%;
+        font-size: 1rem;
+    }
+}

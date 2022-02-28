@@ -14,7 +14,14 @@
                 <small class="text-danger " *ngIf="descripcion.invalid && descripcion.touched ">{{ "VALIDATION.DESCRIPTION_REQUIRED" | translate}}</small>
             </div>
             <div class="form__content-submit">
-                <button type="submit" *ngIf="!consulta" [disabled]="categoriaForm.invalid" class="form__submit">{{ 'SHARED.BUTTONS.SAVE' | translate }}</button>
+                <button type="submit" *ngIf="!consulta" [disabled]="categoriaForm.invalid" class="form__submit">
+                    <i class='bx bx-save icon-style'></i>
+                    {{ 'SHARED.BUTTONS.SAVE' | translate }}
+                </button>
+                <button type="button" (click)="eliminarCategoria()" *ngIf="consulta" class="form__submit">
+                    <i class='bx bx-trash icon-style'></i>
+                    {{ 'SHARED.BUTTONS.DELETE' | translate }}
+                </button>
             </div>
         </form>
     </div>

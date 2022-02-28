@@ -40,47 +40,14 @@ export class ListaCategoriaComponent implements OnInit {
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
-        name: 'id'
+        name: 'ID'
       },
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
-        name: 'nombre'
+        name: 'NOMBRE'
       }
     ];
-  }
-
-  public eliminarCategoria(categoria: Categoria): void {
-    Swal.fire({
-      title: this._translateService.instant('DIALOG.DELETE_TITLE'),
-      text: `${this._translateService.instant('DIALOG.CATEGORY_DELETE_ASK')} ${categoria.nombre} ?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: this._translateService.instant('DIALOG.DELETE_YES'),
-      cancelButtonText: this._translateService.instant('DIALOG.DELETE_NO'),
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this._categoriaService.borrarCategoria(categoria.id).subscribe(resp => {
-          this.categorias = this.categorias.filter(cat => cat != categoria);
-          Swal.fire(
-            this._translateService.instant('DIALOG.CATEGORY_DELETED'),
-            `${resp}`,
-            'success'
-          )
-        },
-        err => {
-          Swal.fire({
-            title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
-            text:  err.error.error,
-            icon: 'error'
-          })
-        });
-        
-      }
-    })
-
   }
 
   onSelect({ selected }) {

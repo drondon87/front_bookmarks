@@ -11,6 +11,7 @@ import { MarcaLibroComponent } from './marca-libro/marca-libro.component';
 import { ListaCitaLibroComponent } from './lista-cita-libro/lista-cita-libro.component';
 import { DetalleCitaLibroComponent } from './detalle-cita-libro/detalle-cita-libro.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent, DetalleCitaLibroComponent],
@@ -20,7 +21,8 @@ import { AgGridModule } from 'ag-grid-angular';
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
-    AgGridModule
+    AgGridModule,
+    NgxDatatableModule
   ],
   exports:[
     ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent, DetalleCitaLibroComponent

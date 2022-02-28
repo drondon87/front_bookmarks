@@ -1,11 +1,20 @@
-<div class="card border-primary mb-3 mt-2">
-    <div class="card-header"> {{ "BOOK.BOOK_TITLE" | translate}} </div>
-    <div class="card-body text-primary">
+<div class="card mb-3">
+    <div class="card-header text-center bg-card text-white"> {{ "BOOK.BOOK_TITLE" | translate}} </div>
+    <div class="card-body txt-content">
         <h5 class="card-title">{{ "BOOK.BOOK_LIST" | translate }}</h5>
-        <div class="my-2 text-left">
-            <button type="button" routerLink="/libros/form" class="btn btn-rounded btn-primary">{{ "SHARED.BUTTONS.ADD_BOOK" | translate }}</button>
+        <div class="mb-3 form__content-submit">
+            <button type="button" class="form__submit" routerLink="/libros/form">{{ "SHARED.BUTTONS.ADD_BOOK" | translate }}</button>
         </div>
-        <div *ngIf="libros?.length == 0" class="alert alert-info">
+        <ngx-datatable class="material" [rows]="data" [columns]="cols" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [selected]="selected" [selectionType]="SelectionType.single" (select)="onSelect($event)">
+        </ngx-datatable>
+        <ng-template #hdrTpl let-column="column">{{ column.name }}</ng-template>
+        <ng-template #editTmpl let-row="row" let-column="column" let-value="value">
+            <ng-container>
+                {{ value }}
+            </ng-container>
+
+        </ng-template>
+        <!-- <div *ngIf="libros?.length == 0" class="alert alert-info">
             {{ "BOOK.WARNING_LIST" | translate }}
         </div>
         <table class="table table-bordered table-striped" *ngIf="libros?.length>0">
@@ -31,6 +40,6 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
     </div>
 </div>

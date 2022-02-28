@@ -47,6 +47,7 @@ export class DetalleCategoriaComponent implements OnInit {
   }
 
   public asignarValores(categoria: Categoria) : void {
+    this.categoria = categoria;
     this.categoriaForm.setValue({
       nombre: categoria.nombre,
       descripcion: categoria.descripcion
@@ -75,6 +76,38 @@ export class DetalleCategoriaComponent implements OnInit {
         })
       }
     );
+  }
+
+  public eliminarCategoria(): void {
+    Swal.fire({
+      title: this._translateService.instant('DIALOG.DELETE_TITLE'),
+      text: `${this._translateService.instant('DIALOG.CATEGORY_DELETE_ASK')} ${this.categoria.nombre} ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: this._translateService.instant('DIALOG.DELETE_YES'),
+      cancelButtonText: this._translateService.instant('DIALOG.DELETE_NO'),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._categoriaService.borrarCategoria(this.categoria.id).subscribe(resp => {
+          Swal.fire(
+            this._translateService.instant('DIALOG.CATEGORY_DELETED'),
+            `${resp}`,
+            'success'
+          )
+          this.router.navigate(['categorias']);
+        },
+        err => {
+          Swal.fire({
+            title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+            text:  err.error.error,
+            icon: 'error'
+          })
+        });
+        
+      }
+    })
   }
 
 }

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Libro } from '../../../models/libro.model';
 import { LibroService } from '../../../services/libro.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SelectionType, ColumnMode } from '@swimlane/ngx-datatable';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-libro',
@@ -11,13 +13,39 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ListaLibroComponent implements OnInit {
 
+  @ViewChild('editTmpl', { static: true }) editTmpl: TemplateRef<any>;
+  @ViewChild('hdrTpl', { static: true }) hdrTpl: TemplateRef<any>;
+
+  public data = [];
+  public cols = [];
+  public selected = [];
+  public SelectionType = SelectionType;
+  public ColumnMode = ColumnMode;
+
   public libros: Libro[] = [];
 
   constructor(private _libroService: LibroService,
-              private _translateService: TranslateService) { }
+              private _translateService: TranslateService,
+              private router: Router) { }
 
-  ngOnInit(): void {
-    this._libroService.getLibros().subscribe(resp => this.libros = resp);
+  public ngOnInit(): void {
+    this.initColumnsTable();
+    this._libroService.getLibros().subscribe(resp => this.data = resp);
+  }
+
+  public initColumnsTable(): void {
+    this.cols = [
+      {
+        cellTemplate: this.editTmpl,
+        headerTemplate: this.hdrTpl,
+        name: 'ID'
+      },
+      {
+        cellTemplate: this.editTmpl,
+        headerTemplate: this.hdrTpl,
+        name: 'NOMBRE'
+      }
+    ];
   }
 
   public eliminarLibro(libro: Libro): void {
@@ -50,6 +78,10 @@ export class ListaLibroComponent implements OnInit {
         
       }
     })
+  }
+
+  onSelect({ selected }) {
+    this.router.navigate(['/libros/form/',selected[0].id]);
   }
 
 }

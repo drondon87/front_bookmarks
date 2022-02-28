@@ -34,7 +34,11 @@
     <div class="card-body txt-content">
         <h5 class="card-title">{{ "CATEGORY.CATEGORY_LIST" | translate }}</h5>
         <div class="mb-3 form__content-submit">
-            <button type="button" class="form__submit" routerLink="/categorias/form">{{ "SHARED.BUTTONS.ADD_CATEGORY" | translate }}</button>
+
+            <button type="button" class="form__submit" routerLink="/categorias/form">
+                <i class='bx bxs-folder-plus icon-style'></i>
+                {{ "SHARED.BUTTONS.ADD_CATEGORY" | translate }}
+            </button>
         </div>
         <ngx-datatable class="material" [rows]="data" [columns]="cols" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [selected]="selected" [selectionType]="SelectionType.single" (select)="onSelect($event)">
         </ngx-datatable>
