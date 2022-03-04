@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     AppRoutingModule,
     // ngx-translate and the loader module
     HttpClientModule,
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false
+    }),
     TranslateModule.forRoot({
         loader: {
             provide: TranslateLoader,

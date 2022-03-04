@@ -1,34 +1,3 @@
-<!-- <div class="card border-primary mb-3 mt-2">
-    <div class="card-header"> {{ "CATEGORY.CATEGORY_TITLE" | translate}} </div>
-    <div class="card-body text-primary">
-        <h5 class="card-title">{{ "CATEGORY.CATEGORY_LIST" | translate }}</h5>
-        <div class="my-2 text-left">
-            <button type="button" routerLink="/categorias/form" class="btn btn-rounded btn-primary">{{ "SHARED.BUTTONS.ADD_CATEGORY" | translate }}</button>
-        </div>
-        <table class="table table-bordered table-striped" *ngIf="categorias?.length>0">
-            <thead>
-                <tr>
-                    <th class="text-center">{{ "CATEGORY.ID" | translate }}</th>
-                    <th class="text-center">{{ "CATEGORY.NAME" | translate }}</th>
-                    <th class="text-center"> # </th>
-                    <th class="text-center"> # </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let categoria of categorias">
-                    <td class="text-center"> {{categoria.id }} </td>
-                    <td> {{categoria.nombre}} </td>
-                    <td class="text-center">
-                        <button type="button" [routerLink]="['/categorias/form',categoria.id]" class="btn btn-primary btn-sm">{{ "SHARED.BUTTONS.CONSULT" | translate }}</button>
-                    </td>
-                    <td class="text-center">
-                        <button type="button" name="eliminar" class="btn btn-danger btn-sm" (click)="eliminarCategoria(categoria)">{{ "SHARED.BUTTONS.DELETE" | translate }}</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div> -->
 <div class="card mb-3">
     <div class="card-header text-center bg-card text-white"> {{ "CATEGORY.CATEGORY_TITLE" | translate}} </div>
     <div class="card-body txt-content">

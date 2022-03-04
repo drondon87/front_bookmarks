@@ -12,6 +12,7 @@ import { ListaCitaLibroComponent } from './lista-cita-libro/lista-cita-libro.com
 import { DetalleCitaLibroComponent } from './detalle-cita-libro/detalle-cita-libro.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent, DetalleCitaLibroComponent],
@@ -22,7 +23,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     FormsModule,
     ReactiveFormsModule,
     AgGridModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    NgxMaskModule.forChild()
   ],
   exports:[
     ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent, DetalleCitaLibroComponent

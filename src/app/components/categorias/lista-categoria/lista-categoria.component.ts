@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Categoria } from '../../../models/categoria.model';
 import { CategoriaService } from '../../../services/categoria.service';
-import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
@@ -40,12 +39,12 @@ export class ListaCategoriaComponent implements OnInit {
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
-        name: 'ID'
+        name: this._translateService.instant('CATEGORY.ID')
       },
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
-        name: 'NOMBRE'
+        name: this._translateService.instant('CATEGORY.NAME')
       }
     ];
   }

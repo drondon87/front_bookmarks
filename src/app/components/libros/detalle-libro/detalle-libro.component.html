@@ -1,6 +1,6 @@
-<div class="card bg-dark text-white mt-2">
-    <div class="card-header text-center">{{ "BOOK.ADD_BOOK_TITLE" | translate}}</div>
-    <div class="card-body">
+<div class="card mt-2">
+    <div class="card-header text-center bg-card text-white">{{ "BOOK.ADD_BOOK_TITLE" | translate}}</div>
+    <div class="card-body txt-content">
         <form [formGroup]="libroForm" (ngSubmit)="guardarLibro()">
             <div class="form-group row">
                 <label class="col-form-label col-sm-2">{{ "BOOK.NAME" | translate}} </label>
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group row">
                 <label class="col-form-label col-sm-2">{{ "BOOK.DATE" | translate}}</label>
-                <input [class.is-invalid]="fechaLibro.invalid && fechaLibro.touched" type="text" formControlName="fechaLibro" class="form-control" required>
+                <input [class.is-invalid]="fechaLibro.invalid && fechaLibro.touched" type="text" formControlName="fechaLibro" class="form-control" mask="d0/M0/0000" [leadZeroDateTime]="true" required>
                 <small class="text-danger" *ngIf="fechaLibro.invalid && fechaLibro.touched ">{{ "VALIDATION.DATE_REQUIRED" | translate}}</small>
             </div>
             <div class="form-group row">
@@ -28,10 +28,15 @@
                     <option *ngFor="let categoria of categorias" [value]="categoria.id"> {{categoria.nombre}} </option>
                   </select>
             </div>
-            <div class="form-group row">
-                <div class="col-sm-6 mt-3">
-                    <button type="submit" *ngIf="!consulta" [disabled]="libroForm.invalid" class="btn btn-primary">{{ 'SHARED.BUTTONS.SAVE' | translate }}</button>
-                </div>
+            <div class="form__content-submit">
+                <button type="submit" *ngIf="!consulta" [disabled]="libroForm.invalid" class="form__submit">
+                    <i class='bx bx-save icon-style'></i>
+                    {{ 'SHARED.BUTTONS.SAVE' | translate }}
+                </button>
+                <button type="button" (click)="eliminarLibro()" *ngIf="consulta" class="form__submit">
+                    <i class='bx bx-trash icon-style'></i>
+                    {{ 'SHARED.BUTTONS.DELETE' | translate }}
+                </button>
             </div>
         </form>
     </div>

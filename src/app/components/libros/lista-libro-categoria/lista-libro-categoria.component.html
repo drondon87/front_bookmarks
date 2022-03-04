@@ -1,43 +1,25 @@
-<div class="card border-primary mb-3 mt-2">
-    <div class="card-header"> {{ "BOOK.BOOK_CATEGORY_TITLE" | translate}} </div>
-    <div class="card-body text-primary">
+<div class="card mb-3">
+    <div class="card-header text-center bg-card text-white"> {{ "BOOK.BOOK_CATEGORY_TITLE" | translate}} </div>
+    <div class="card-body txt-content">
         <h5 class="card-title">{{ "BOOK.BOOK_LIST" | translate }}</h5>
-        <div class="row">
-            <div class="col-11">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="categoriaId">
-                    <option *ngFor="let categoria of categorias" [value]="categoria.id"> {{categoria.nombre}} </option>
-                </select>
-            </div>
-            <div class="col-1">
-                <button type="button" (click)="buscarLibros()" class="btn btn-primary btn-sm">{{ "SHARED.BUTTONS.SEARCH" | translate }}</button>
-            </div>
-            <div *ngIf="libros?.length == 0" class="alert alert-info mt-3">
-                {{ "BOOK.WARNING_LIST" | translate }}
-            </div>
-            <table class="table table-bordered table-striped mt-3" *ngIf="libros?.length>0">
-                <thead>
-                    <tr>
-                        <th class="text-center">{{ "BOOK.ID" | translate }}</th>
-                        <th class="text-center">{{ "BOOK.NAME" | translate }}</th>
-                        <th class="text-center">{{ "BOOK.CATEGORY" | translate }}</th>
-                        <th class="text-center"> # </th>
-                        <th class="text-center"> # </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let libro of libros">
-                        <td class="text-center"> {{libro.id }} </td>
-                        <td> {{libro.nombre}} </td>
-                        <td class="text-center"> {{libro.categoria.nombre}} </td>
-                        <td class="text-center">
-                            <button type="button" [routerLink]="['/libros/form',libro.id]" class="btn btn-primary btn-sm">{{ "SHARED.BUTTONS.CONSULT" | translate }}</button>
-                        </td>
-                        <td class="text-center">
-                            <button type="button" name="eliminar" class="btn btn-danger btn-sm" (click)="eliminarLibro(libro)">{{ "SHARED.BUTTONS.DELETE" | translate }}</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="conteiner__search">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="categoriaId">
+                <option *ngFor="let categoria of categorias" [value]="categoria.id"> {{categoria.nombre}} </option>
+            </select>
+            <button type="button" (click)="buscarLibros()" class="form__submit">{{ "SHARED.BUTTONS.SEARCH" | translate }}</button>
+        </div>
+        <div *ngIf="libros?.length == 0" class="alert alert-info mt-3">
+            {{ "BOOK.WARNING_LIST" | translate }}
+        </div>
+        <div *ngIf="libros?.length>0" class="mt-3">
+            <ngx-datatable class="material" [rows]="data" [columns]="cols" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [selected]="selected" [selectionType]="SelectionType.single" (select)="onSelect($event)">
+            </ngx-datatable>
+            <ng-template #hdrTpl let-column="column">{{ column.name }}</ng-template>
+            <ng-template #editTmpl let-row="row" let-column="column" let-value="value">
+                <ng-container>
+                    {{ value }}
+                </ng-container>
+            </ng-template>
         </div>
     </div>
 </div>
