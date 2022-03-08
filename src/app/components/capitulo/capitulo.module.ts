@@ -7,6 +7,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetalleCapituloComponent } from './detalle-capitulo/detalle-capitulo.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { AgGridModule } from 'ag-grid-angular';
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
-    AgGridModule
+    AgGridModule,
+    NgxDatatableModule,
+    NgxMaskModule.forChild()
   ],
   exports:[ListaCapituloComponent, DetalleCapituloComponent]
 })

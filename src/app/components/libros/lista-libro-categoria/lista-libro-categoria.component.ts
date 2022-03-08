@@ -17,7 +17,6 @@ export class ListaLibroCategoriaComponent implements OnInit {
   @ViewChild('editTmpl', { static: true }) editTmpl: TemplateRef<any>;
   @ViewChild('hdrTpl', { static: true }) hdrTpl: TemplateRef<any>;
 
-  public data = [];
   public cols = [];
   public selected = [];
   public SelectionType = SelectionType;
@@ -39,7 +38,6 @@ export class ListaLibroCategoriaComponent implements OnInit {
   public buscarLibros(): void{
     this.initColumnsTable();
     this._libroService.getLibrosByCategoria(this.categoriaId).subscribe(resp =>{
-       this.data = resp;
        this.libros = resp;
     });
   }

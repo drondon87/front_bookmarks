@@ -1,7 +1,7 @@
-<div class="card bg-dark text-white mt-2">
-    <div class="card-header text-center" *ngIf="!consulta">{{ "CHAPTERS.ADD_CHAPTER_TITLE" | translate}}</div>
-    <div class="card-header text-center" *ngIf="consulta"> {{ "CHAPTERS.CONSULT_CHAPTER_TITLE" | translate}} </div>
-    <div class="card-body">
+<div class="card mt-2">
+    <div class="card-header text-center bg-card text-white" *ngIf="!consulta">{{ "CHAPTERS.ADD_CHAPTER_TITLE" | translate}}</div>
+    <div class="card-header text-center bg-card text-white" *ngIf="consulta"> {{ "CHAPTERS.CONSULT_CHAPTER_TITLE" | translate}} </div>
+    <div class="card-body txt-content">
         <form [formGroup]="capituloForm" (ngSubmit)="guardarCapitulo()">
             <div class="form-group row">
                 <label class="col-form-label col-sm-2">{{ "CHAPTERS.NUMBER" | translate}} </label>
@@ -18,29 +18,40 @@
                 <textarea [class.is-invalid]="descripcion.invalid && descripcion.touched" class="form-control" formControlName="descripcion" required></textarea>
                 <small class="text-danger " *ngIf="descripcion.invalid && descripcion.touched ">{{ "VALIDATION.DESCRIPTION_REQUIRED" | translate}}</small>
             </div>
-            <div class="form-group row">
-                <div class="col-sm-6 mt-3">
-                    <button type="submit" *ngIf="!consulta" [disabled]="capituloForm.invalid" class="btn btn-primary">{{ 'SHARED.BUTTONS.SAVE' | translate }}</button>
-                    <button type="button" *ngIf="consulta" class="btn btn-danger" (click)="eliminarCapitulo()">{{ 'SHARED.BUTTONS.DELETE' | translate }}</button>
-                </div>
+            <div class="form__content-submit">
+                <button type="submit" *ngIf="!consulta" [disabled]="capituloForm.invalid" class="form__submit">
+                        <i class='bx bx-save icon-style'></i>
+                        {{ 'SHARED.BUTTONS.SAVE' | translate }}
+                    </button>
+                <button type="button" *ngIf="consulta" class="form__submit" (click)="eliminarCapitulo()">
+                        <i class='bx bx-trash icon-style'></i>
+                        {{ 'SHARED.BUTTONS.DELETE' | translate }}
+                </button>
             </div>
         </form>
     </div>
 </div>
-<div class="card border-primary mb-3 mt-2" *ngIf="consulta">
-    <div class="card-header"> {{ "BOOK_MARKS.BOOK_MARK_TITLE" | translate}} </div>
-    <div class="row mt-3" *ngIf="capituloId > 0">
-        <div class="col-2">
-            <button type="button" (click)="crearMarcaLibro()" class="btn btn-primary btn-sm">{{ "SHARED.BUTTONS.ADD_BOOK_MARK" | translate }}</button>
-        </div>
+<div class="card mt-2" *ngIf="consulta">
+    <div class="card-header text-center bg-card text-white"> {{ "BOOK_MARKS.BOOK_MARK_TITLE" | translate}} </div>
+    <div *ngIf="capituloId > 0" class="mb-2 form__content-submit">
+        <button type="button" (click)="crearMarcaLibro()" class="form__submit form__submit--detail">
+            <i class='bx bxs-folder-plus icon-style'></i>
+            {{ "SHARED.BUTTONS.ADD_BOOK_MARK" | translate }}
+        </button>
+    </div>
+    <div *ngIf="marcasLibros?.length == 0" class="alert-content alert alert-info">
+        {{ "VALIDATION.WARNING_LIST" | translate }}
     </div>
     <div class="card-body text-primary">
-        <div *ngIf="marcasLibros?.length == 0" class="alert alert-info mt-3">
-            {{ "VALIDATION.WARNING_LIST" | translate }}
-        </div>
-        <div *ngIf="rowData?.length>0">
-            <ag-grid-angular style="width: 90%; height: 500px;" class="ag-theme-balham" (gridReady)="onGridReady($event)" [rowData]="rowData" [columnDefs]="columnDefs" [pagination]="true" [rowSelection]="rowSelection" (selectionChanged)="onSelectionChanged($event)">
-            </ag-grid-angular>
+        <div *ngIf="marcasLibros.length>0">
+            <ngx-datatable class="material" [rows]="marcasLibros" [columns]="cols" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10" [selected]="selected" [selectionType]="SelectionType.single" (select)="onSelect($event)">
+            </ngx-datatable>
+            <ng-template #hdrTpl let-column="column">{{ column.name }}</ng-template>
+            <ng-template #editTmpl let-row="row" let-column="column" let-value="value">
+                <ng-container>
+                    {{ value }}
+                </ng-container>
+            </ng-template>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { ActivatedRoute,  Router } from '@angular/router';
 import { Capitulo } from '../../../models/capitulo.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateCapitulo } from '../../../models/create.capitulo.model';
@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { MarcaLibro } from '../../../models/marcaLibro.model';
 import { MarcaLibroService } from '../../../services/marca-libro.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SelectionType, ColumnMode } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-detalle-capitulo',
@@ -16,6 +17,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class DetalleCapituloComponent implements OnInit {
 
+  @ViewChild('editTmpl', { static: true }) editTmpl: TemplateRef<any>;
+  @ViewChild('hdrTpl', { static: true }) hdrTpl: TemplateRef<any>;
+
   public consulta: boolean = false;
   public capitulo: Capitulo = new Capitulo();
   public capituloForm: FormGroup;
@@ -23,9 +27,12 @@ export class DetalleCapituloComponent implements OnInit {
   public libroId: number = 0;
   public marcasLibros: MarcaLibro[] = [];
   public capituloId: number = 0;
-  public rowSelection = 'single';
-  public gridApi;
-  public gridColumnApi;
+
+  public cols = [];
+  public selected = [];
+  public SelectionType = SelectionType;
+  public ColumnMode = ColumnMode;
+
 
   get numero(){ return this.capituloForm.get('numero'); }
 
@@ -39,14 +46,7 @@ export class DetalleCapituloComponent implements OnInit {
               private _capituloService: CapituloService,
               private _marcaLibroService: MarcaLibroService,
               private _translateService: TranslateService) { }
-
-  public columnDefs = [
-    {headerName: this._translateService.instant('BOOK_MARKS.ID'), field: 'id', sortable:true},
-    {headerName: this._translateService.instant('BOOK_MARKS.DESCRIPTION'), field: 'descripcion', sortable:true}
-  ];
   
-  public rowData = [];
-
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       let libroId:number = +params.get('libroId');
@@ -58,9 +58,9 @@ export class DetalleCapituloComponent implements OnInit {
         this.consulta=true;
 
         this._capituloService.obtenerCapitulo(id).subscribe(capitulo => this.asignarValores(capitulo));
+        this.initColumnsTable();
         this._marcaLibroService.getMarcasLibrosByCapitulo(id).subscribe(marcas => {
           this.marcasLibros = marcas;
-          this.rowData = this.marcasLibros;
         });
       }
     });
@@ -144,15 +144,24 @@ export class DetalleCapituloComponent implements OnInit {
     this.router.navigate(['/libros/marcalibro/form/capitulo/',this.capituloId]);
   }
 
-  public onSelectionChanged(event) {
-    let selectedRows = this.gridApi.getSelectedRows();
-    let idMarcaLibro: number = selectedRows[0].id;
-    let capituloId: number = selectedRows[0].capitulo.id;
-    this.router.navigate(['/libros/marcalibro/form/',capituloId,idMarcaLibro]);
+  public initColumnsTable(): void {
+    this.cols = [
+      {
+        cellTemplate: this.editTmpl,
+        headerTemplate: this.hdrTpl,
+        name: this._translateService.instant('BOOK_MARKS.ID')
+      },
+      {
+        cellTemplate: this.editTmpl,
+        headerTemplate: this.hdrTpl,
+        name: 'Descripcion'
+      }
+    ];
   }
 
-  public onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
+  onSelect({ selected }) {
+    let idMarcaLibro: number = selected[0].id;
+    let capituloId: number = selected[0].capitulo.id;
+    this.router.navigate(['/libros/marcalibro/form/',capituloId,idMarcaLibro]);
   }
 }

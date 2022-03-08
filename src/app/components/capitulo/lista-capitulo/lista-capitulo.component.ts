@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Libro } from '../../../models/libro.model';
 import { LibroService } from '../../../services/libro.service';
 import { CapituloService } from '../../../services/capitulo.service';
 import { Capitulo } from '../../../models/capitulo.model';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { SelectionType, ColumnMode } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-lista-capitulo',
@@ -13,47 +14,51 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ListaCapituloComponent implements OnInit {
   
+  @ViewChild('editTmpl', { static: true }) editTmpl: TemplateRef<any>;
+  @ViewChild('hdrTpl', { static: true }) hdrTpl: TemplateRef<any>;
+
   public libros: Libro[] = [];
   public libroId: number = 0;
   public capitulos: Capitulo[] = [];
-  public paginador: any;
-  public rowSelection = 'single';
-  public gridApi;
-  public gridColumnApi;
+
+  public cols = [];
+  public selected = [];
+  public SelectionType = SelectionType;
+  public ColumnMode = ColumnMode;
 
   constructor(private _libroService: LibroService,
               private _capituloService: CapituloService,
               private router: Router,
               private _translateService: TranslateService) { }
 
-  public columnDefs = [
-      {headerName: this._translateService.instant('CATEGORY.ID'), field: 'id', sortable:true},
-      {headerName: this._translateService.instant('CHAPTERS.NUMBER'), field: 'numero', sortable:true},
-      {headerName: this._translateService.instant('CHAPTERS.NAME'), field: 'nombre', sortable:true}
-    ];
-  
-  public rowData = [];
-
   ngOnInit(): void {
     this._libroService.getLibros().subscribe(resp => this.libros = resp);
   }
 
   buscarCapitulos(){
+    this.initColumnsTable();
     this._capituloService.getCapitulosByLIbro(this.libroId).subscribe(resp => {
       this.capitulos = resp as Capitulo[];
-      this.rowData = this.capitulos;
     });
   }
 
-  onSelectionChanged(event) {
-    let selectedRows = this.gridApi.getSelectedRows();
-    let idCapitulo: number = selectedRows[0].id;
-    this.router.navigate(['/capitulos/form/',idCapitulo]);
+  public initColumnsTable(): void {
+    this.cols = [
+      {
+        cellTemplate: this.editTmpl,
+        headerTemplate: this.hdrTpl,
+        name: 'Numero'
+      },
+      {
+        cellTemplate: this.editTmpl,
+        headerTemplate: this.hdrTpl,
+        name: this._translateService.instant('CHAPTERS.NAME')
+      }
+    ];
   }
 
-  onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
+  onSelect({ selected }) {
+    this.router.navigate(['/capitulos/form/',selected[0].id]);
   }
 
   crearCapitulo(): void {

@@ -1,10 +1,7 @@
-<div class="card bg-dark text-white mt-2">
-    <div class="card-header text-center" *ngIf="!consulta">{{ "BOOK_MARKS.ADD_BOOK_MARK_TITLE" | translate}}</div>
-    <div class="card-header text-center" *ngIf="consulta"> {{ "BOOK_MARKS.CONSULT_BOOK_MARK_TITLE" | translate}} </div>
-    <div class="card-body">
-        <div class="col-sm-12 mb-3" style="text-align: right;">
-            <button type="button" (click)="volver()" class="btn btn-primary">{{ 'SHARED.BUTTONS.BACK' | translate }}</button>
-        </div>
+<div class="card mt-2">
+    <div class="card-header text-center bg-card text-white" *ngIf="!consulta">{{ "BOOK_MARKS.ADD_BOOK_MARK_TITLE" | translate}}</div>
+    <div class="card-header text-center bg-card text-white" *ngIf="consulta"> {{ "BOOK_MARKS.CONSULT_BOOK_MARK_TITLE" | translate}} </div>
+    <div class="card-body txt-content">
         <form [formGroup]="marcaLibroForm" (ngSubmit)="guardarMarcaLibro()">
             <div class="form-group row">
                 <label class="col-form-label col-sm-2">{{ "BOOK_MARKS.DESCRIPTION" | translate}} </label>
@@ -24,11 +21,20 @@
                 <label class="col-form-label col-sm-2">{{ "BOOK_MARKS.RESUME" | translate}} </label>
                 <textarea class="form-control" formControlName="resumen"></textarea>
             </div>
-            <div class="form-group row">
-                <div class="col-sm-6 mt-3">
-                    <button type="submit" *ngIf="!consulta" [disabled]="marcaLibroForm.invalid" class="btn btn-primary">{{ 'SHARED.BUTTONS.SAVE' | translate }}</button>
-                    <button type="button" *ngIf="consulta" name="eliminar" class="btn btn-danger btn-sm" (click)="eliminarMarcaLibro()">{{ "SHARED.BUTTONS.DELETE" | translate }}</button>
-                </div>
+            <div class="form__content-submit">
+                <button type="button" (click)="volver()" class="form__submit">
+                    <i class='bx bx-arrow-back icon-style'></i>
+                    {{ 'SHARED.BUTTONS.BACK' | translate }}
+                </button>
+                <button type="submit" *ngIf="!consulta" [disabled]="marcaLibroForm.invalid" class="form__submit">
+                    <i class='bx bx-save icon-style'></i>
+                    {{ 'SHARED.BUTTONS.SAVE' | translate }}
+                </button>
+                <button type="button" *ngIf="consulta" name="eliminar" class="form__submit" (click)="eliminarMarcaLibro()">
+                    <i class='bx bx-trash icon-style'></i>
+                    {{ "SHARED.BUTTONS.DELETE" | translate }}
+                </button>
+
             </div>
         </form>
     </div>
