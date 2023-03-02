@@ -12,11 +12,12 @@ import { CreateCapitulo } from '../models/create.capitulo.model';
 export class CapituloService {
 
   private urlEndpoint: string = environment.urlEndpoint;
+  private controller: string = 'capitulos';
 
   constructor(private http: HttpClient) { }
 
   public getCapitulosByLIbro(id: number) : Observable<Capitulo[]>  {
-    return this.http.get(`${this.urlEndpoint}/capitulo/libro/${id}`)
+    return this.http.get(`${this.urlEndpoint}/${this.controller}/libro/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Capitulo[] ),
       catchError(err => {
@@ -26,7 +27,7 @@ export class CapituloService {
   }
 
   public getCapitulosByLibroAndPage(id: number, page: number) : Observable<any[]>  {
-    return this.http.get(`${this.urlEndpoint}/capitulo/libro/${id}/page/${page}`)
+    return this.http.get(`${this.urlEndpoint}/${this.controller}/libro/${id}/page/${page}`)
     .pipe(
       map((resp: any) => resp['data']),
       catchError(err => {
@@ -36,7 +37,7 @@ export class CapituloService {
   }
 
   public borrarCapitulo(id: number): Observable<string> {
-    return this.http.delete(`${this.urlEndpoint}/capitulo/${id}`)
+    return this.http.delete(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
       map((resp: any) => resp['message'] as string ),
       catchError(err => {
@@ -46,7 +47,7 @@ export class CapituloService {
   }
 
   public crearCapitulo(createCapitulo: CreateCapitulo): Observable<Capitulo> {
-    return this.http.post(`${this.urlEndpoint}/capitulo`, createCapitulo).pipe(
+    return this.http.post(`${this.urlEndpoint}/${this.controller}`, createCapitulo).pipe(
       map((resp: any) => resp['data'] as Capitulo),
       catchError(err => {
         return throwError(err);
@@ -55,7 +56,7 @@ export class CapituloService {
   }
 
   public obtenerCapitulo(id: number) : Observable<Capitulo> {
-    return this.http.get(`${this.urlEndpoint}/capitulo/${id}`)
+    return this.http.get(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Capitulo ),
       catchError(err => {

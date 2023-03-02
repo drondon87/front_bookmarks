@@ -11,21 +11,22 @@ import { environment } from '../../environments/environment';
 export class CategoriaService {
 
   private urlEndpoint: string = environment.urlEndpoint;
+  private controller: string = 'categorias';
 
   constructor(private http: HttpClient) { }
 
   public getCategorias() : Observable<Categoria[]>  {
-    return this.http.get(`${this.urlEndpoint}/categoria`)
+    return this.http.get(`${this.urlEndpoint}/${this.controller}`)
     .pipe(
       map((resp: any) => resp['data'] as Categoria[] ),
       catchError(err => {
         return throwError(err);
       })
     );
-  }  
+  }
 
   public borrarCategoria(id: number): Observable<string> {
-    return this.http.delete(`${this.urlEndpoint}/categoria/${id}`)
+    return this.http.delete(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
       map((resp: any) => resp['message'] as string ),
       catchError(err => {
@@ -35,7 +36,7 @@ export class CategoriaService {
   }
 
   public obtenerCategoria(id: number) : Observable<Categoria> {
-    return this.http.get(`${this.urlEndpoint}/categoria/${id}`)
+    return this.http.get(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Categoria ),
       catchError(err => {
@@ -45,7 +46,7 @@ export class CategoriaService {
   }
 
   public crearCategoria(categoria: Categoria): Observable<Categoria> {
-    return this.http.post(`${this.urlEndpoint}/categoria`, categoria).pipe(
+    return this.http.post(`${this.urlEndpoint}/${this.controller}`, categoria).pipe(
       map((resp: any) => resp['data'] as Categoria),
       catchError(err => {
         return throwError(err);

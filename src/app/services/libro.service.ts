@@ -12,11 +12,12 @@ import { CreateLibro } from '../models/create.libro.model';
 export class LibroService {
 
   private urlEndpoint: string = environment.urlEndpoint;
+  private controller: string = 'libros';
 
   constructor(private http: HttpClient) { }
 
   public getLibros() : Observable<Libro[]>  {
-    return this.http.get(`${this.urlEndpoint}/libro`)
+    return this.http.get(`${this.urlEndpoint}/${this.controller}`)
     .pipe(
       map((resp: any) => resp['data'] as Libro[] ),
       catchError(err => {
@@ -26,7 +27,7 @@ export class LibroService {
   }
 
   public borrarLibro(id: number): Observable<string> {
-    return this.http.delete(`${this.urlEndpoint}/libro/${id}`)
+    return this.http.delete(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
       map((resp: any) => resp['message'] as string ),
       catchError(err => {
@@ -36,7 +37,7 @@ export class LibroService {
   }
 
   public crearLibro(createLibro: CreateLibro): Observable<Libro> {
-    return this.http.post(`${this.urlEndpoint}/libro`, createLibro).pipe(
+    return this.http.post(`${this.urlEndpoint}/${this.controller}`, createLibro).pipe(
       map((resp: any) => resp['data'] as Libro),
       catchError(err => {
         return throwError(err);
@@ -45,7 +46,7 @@ export class LibroService {
   }
 
   public obtenerLibro(id: number) : Observable<Libro> {
-    return this.http.get(`${this.urlEndpoint}/libro/${id}`)
+    return this.http.get(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Libro ),
       catchError(err => {
@@ -55,7 +56,7 @@ export class LibroService {
   }
 
   public getLibrosByCategoria(id: number) : Observable<Libro[]>  {
-    return this.http.get(`${this.urlEndpoint}/libro/categoria/${id}`)
+    return this.http.get(`${this.urlEndpoint}/${this.controller}/categoria/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Libro[] ),
       catchError(err => {
