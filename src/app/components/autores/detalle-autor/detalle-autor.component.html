@@ -1,0 +1,28 @@
+<div class="card mt-2">
+    <div class="card-header text-center bg-card text-white" *ngIf="!consulta">{{ "AUTHOR.ADD_AUTHOR_TITLE" | translate}}</div>
+    <div class="card-header text-center bg-card text-white" *ngIf="consulta"> {{ "AUTHOR.CONSULT_AUTHOR_TITLE" | translate}} </div>
+    <div class="card-body txt-content">
+        <form [formGroup]="autorForm" (ngSubmit)="guardarAutor()">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "AUTHOR.NAME" | translate}} </label>
+                <input [class.is-invalid]="nombre.invalid && nombre.touched" type="text" formControlName="nombre" class="form-control" required>
+                <small class="text-danger " *ngIf="nombre.invalid && nombre.touched ">{{ "VALIDATION.NAME_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "AUTHOR.LAST_NAME" | translate}} </label>
+                <input [class.is-invalid]="apellido.invalid && apellido.touched" type="text" formControlName="apellido" class="form-control" required>
+                <small class="text-danger " *ngIf="apellido.invalid && apellido.touched ">{{ "VALIDATION.LAST_NAME_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form__content-submit">
+                <button type="submit" *ngIf="!consulta" [disabled]="autorForm.invalid" class="form__submit">
+                  <i class='bx bx-save icon-style'></i>
+                  {{ 'SHARED.BUTTONS.SAVE' | translate }}
+              </button>
+                <button type="button" (click)="eliminarAutor()" *ngIf="consulta" class="form__submit">
+                  <i class='bx bx-trash icon-style'></i>
+                  {{ 'SHARED.BUTTONS.DELETE' | translate }}
+              </button>
+            </div>
+        </form>
+    </div>
+</div>

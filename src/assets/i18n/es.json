@@ -5,7 +5,8 @@
         "CHRONOLOGY_MENU": "Cronologías",
         "BOOKS_CATEGOY_MENU": "Libros Categoria",
         "CHAPTERS_MENU": "Capítulos",
-        "BOOKS_DATE_MENU": "Citas Libro"
+        "BOOKS_DATE_MENU": "Citas Libro",
+        "AUTHOR_MENU": "Autores"
     },
     "SHARED": {
         "BUTTONS": {
@@ -19,7 +20,8 @@
             "ADD_CHAPTER": "Crear Capítulo",
             "ADD_BOOK_MARK": "Crear Marca Libro",
             "ADD_BOOK_DATE": "Crear Cita Libro",
-            "BACK": "Volver"
+            "BACK": "Volver",
+            "ADD_AUTHOR": "Crear Autor"
         }
     },
     "CATEGORY": {
@@ -76,7 +78,8 @@
         "AUTHOR_REQUIRED": "Autor es requerido",
         "WARNING_LIST": "No existen registros actualmente",
         "NUMBER_REQUIRED": "Número es requerido",
-        "PAGES_REQUIRED": "Páginas es requerido"
+        "PAGES_REQUIRED": "Páginas es requerido",
+        "LAST_NAME_REQUIRED": "Apellido es requerido"
     },
     "DIALOG": {
         "DELETE_TITLE": "¿Está seguro?",
@@ -97,6 +100,18 @@
         "BOOK_MARK_ADD_TEXT": "La Marca Libro",
         "ERROR_TITLE": "Error !!!",
         "BOOK_MARK_DELETE_ASK": "¿Seguro que desea eliminar la marca libro ",
-        "BOOK_MARK_DELETED": "Marca Libro Eliminada!"
+        "BOOK_MARK_DELETED": "Marca Libro Eliminada!",
+        "AUTHOR_ADD": "Nuevo Autor",
+        "AUTHOR_ADD_TEXT": "El autor ",
+        "AUTHOR_DELETE_ASK": "¿Seguro que desea eliminar el autor ",
+        "AUTHOR_DELETED": "Autor Eliminado!"
+    },
+    "AUTHOR": {
+        "ID": "Id",
+        "NAME": "Nombre",
+        "LAST_NAME": "Apellido",
+        "AUTHOR_LIST": "Lista Autores",
+        "ADD_AUTHOR_TITLE": "Crear Autor",
+        "CONSULT_AUTHOR_TITLE": "Consultar Autor"
     }
 }
