@@ -1,3 +1,5 @@
+import { Autor } from './autor.model';
+import { Categoria } from './categoria.model';
 export class CreateLibro {
     nombre: string;
     descripcion: string;
@@ -5,5 +7,7 @@ export class CreateLibro {
     createAt: Date;
     categoriaId: number;
     fechaLibro: string;
-    autor: string;
+    autorId: string;
+    autor: Autor;
+    categoria: Categoria;
 }

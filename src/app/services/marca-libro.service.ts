@@ -16,7 +16,7 @@ export class MarcaLibroService {
   constructor(private http: HttpClient) { }
 
   public getMarcasLibrosByCapitulo(id: number) : Observable<MarcaLibro[]>  {
-    return this.http.get(`${this.urlEndpoint}/marcaLibro/capitulo/${id}`)
+    return this.http.get(`${this.urlEndpoint}/marcalibro/capitulo/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as MarcaLibro[] ),
       catchError(err => {
@@ -26,7 +26,7 @@ export class MarcaLibroService {
   }
 
   public borrarMarcaLibro(id: number): Observable<string> {
-    return this.http.delete(`${this.urlEndpoint}/marcaLibro/${id}`)
+    return this.http.delete(`${this.urlEndpoint}/marcalibro/${id}`)
     .pipe(
       map((resp: any) => resp['message'] as string ),
       catchError(err => {
@@ -36,7 +36,7 @@ export class MarcaLibroService {
   }
 
   public obtenerMarcaLibro(id: number) : Observable<MarcaLibro> {
-    return this.http.get(`${this.urlEndpoint}/marcaLibro/${id}`)
+    return this.http.get(`${this.urlEndpoint}/marcalibro/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as MarcaLibro ),
       catchError(err => {
@@ -46,7 +46,7 @@ export class MarcaLibroService {
   }
 
   public crearMarcaLibro(createMarcaLibro: CreateMarcaLibro): Observable<MarcaLibro> {
-    return this.http.post(`${this.urlEndpoint}/marcaLibro`, createMarcaLibro).pipe(
+    return this.http.post(`${this.urlEndpoint}/marcalibro`, createMarcaLibro).pipe(
       map((resp: any) => resp['data'] as MarcaLibro),
       catchError(err => {
         return throwError(err);

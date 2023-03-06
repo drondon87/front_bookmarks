@@ -9,8 +9,9 @@
             </div>
             <div class="form-group row">
                 <label class="col-form-label col-sm-2">{{ "BOOK.AUTHOR" | translate}} </label>
-                <input [class.is-invalid]="autor.invalid && autor.touched" type="text" formControlName="autor" class="form-control" required>
-                <small class="text-danger " *ngIf="autor.invalid && autor.touched ">{{ "VALIDATION.AUTHOR_REQUIRED" | translate}}</small>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" formControlName="autorId">
+                  <option *ngFor="let autor of autores" [value]="autor.id"> {{autor.nombre}} {{autor.apellido}} </option>
+                </select>
             </div>
             <div class="form-group row">
                 <label class="col-form-label col-sm-2">{{ "BOOK.DESCRIPTION" | translate}} </label>

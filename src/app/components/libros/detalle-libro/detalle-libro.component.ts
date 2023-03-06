@@ -9,6 +9,8 @@ import Swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { Autor } from 'src/app/models/autor.model';
+import { AutorService } from 'src/app/services/autor.service';
 
 @Component({
   selector: 'app-detalle-libro',
@@ -22,13 +24,15 @@ export class DetalleLibroComponent implements OnInit {
   public consulta: boolean = false;
   public categorias: Categoria[] = [];
   public createLibro: CreateLibro = new CreateLibro();
+  public autores: Autor[] = [];
 
   constructor(private fb: FormBuilder,
               private _categoriaService: CategoriaService,
               private _libroService: LibroService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private _translateService: TranslateService) { }
+              private _translateService: TranslateService,
+              private _autorService: AutorService) { }
 
   get nombre(){ return this.libroForm.get('nombre'); }
 
@@ -38,7 +42,7 @@ export class DetalleLibroComponent implements OnInit {
 
   get categoriaId(){ return this.libroForm.get('categoriaId'); }
 
-  get autor(){ return this.libroForm.get('autor'); }
+  get autorId(){ return this.libroForm.get('autorId'); }
 
   ngOnInit(): void {
 
@@ -50,6 +54,7 @@ export class DetalleLibroComponent implements OnInit {
       }
     });
     this._categoriaService.getCategorias().subscribe(resp => this.categorias = resp);
+    this._autorService.getAutores().subscribe(resp  => this.autores = resp);
     this.initForm();
   }
 
@@ -59,7 +64,7 @@ export class DetalleLibroComponent implements OnInit {
       descripcion: [{value:'' , disabled: this.consulta}, Validators.required],
       fechaLibro: [{value:'' , disabled: this.consulta}, Validators.required],
       categoriaId: [{value:'' , disabled: this.consulta}, Validators.required],
-      autor: [{value:'' , disabled: this.consulta}, Validators.required] 
+      autorId: [{value:'' , disabled: this.consulta}, Validators.required]
     });
   }
 
@@ -70,20 +75,26 @@ export class DetalleLibroComponent implements OnInit {
       descripcion: libro.descripcion,
       fechaLibro: formatDate(libro.createAt,'dd/MM/yyyy','en') ,
       categoriaId: libro.categoria.id,
-      autor: libro.autor
+      autorId: libro.autor.id
     });
   }
 
   public guardarLibro() : void {
     if(this.libroForm.invalid){ return;}
-  
-    const { nombre, descripcion, fechaLibro, categoriaId, autor } = this.libroForm.value;
-    
+
+    const { nombre, descripcion, fechaLibro, categoriaId, autorId } = this.libroForm.value;
+
     this.createLibro.nombre = nombre;
     this.createLibro.descripcion= descripcion;
     this.createLibro.fechaLibro = fechaLibro;
     this.createLibro.categoriaId = categoriaId;
-    this.createLibro.autor = autor;
+    this.createLibro.autorId = autorId;
+
+    const autorSelected: Autor = this.autores.find(autor => Number(this.createLibro.autorId) === Number(autor.id));
+    this.createLibro.autor = autorSelected;
+
+    const categoriaSelected: Categoria = this.categorias.find(categoria => Number(this.createLibro.categoriaId) === Number(categoria.id));
+    this.createLibro.categoria = categoriaSelected;
 
     this._libroService.crearLibro(this.createLibro)
     .subscribe(libro => {
@@ -128,7 +139,7 @@ export class DetalleLibroComponent implements OnInit {
             icon: 'error'
           })
         });
-        
+
       }
     })
   }
