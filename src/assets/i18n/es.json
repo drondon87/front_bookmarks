@@ -44,7 +44,8 @@
         "ADD_BOOK_TITLE": "Crear Libro",
         "DESCRIPTION": "Descripción",
         "DATE": "Fecha",
-        "AUTHOR": "Autor"
+        "AUTHOR": "Autor",
+        "LAST_BOOK_RECORDS": "Últimos Libros Registrados"
     },
     "CHAPTERS": {
         "CHAPTER_TITLE": "Capítulos",
@@ -53,7 +54,8 @@
         "NAME": "Nombre",
         "ADD_CHAPTER_TITLE": "Crear Capítulo",
         "CONSULT_CHAPTER_TITLE": "Consultar Capítulo",
-        "DESCRIPTION": "Descripción"
+        "DESCRIPTION": "Descripción",
+        "LAST_CHAPTERS_RECORDS": "Últimos Capítulos Registrados"
     },
     "BOOK_MARKS": {
         "BOOK_MARK_TITLE": "Marcas de Libros",
@@ -62,7 +64,8 @@
         "ADD_BOOK_MARK_TITLE": "Crear Marca Libro",
         "CONSULT_BOOK_MARK_TITLE": "Consulta Marca Libro",
         "PAGES": "Páginas",
-        "RESUME": "Resumen"
+        "RESUME": "Resumen",
+        "LAST_BOOK_MARKS_RECORDS": "Últimas Marcas Libros Registradas"
     },
     "BOOK_DATES": {
         "BOOK_DATE_TITLE": "Citas de Libros",
@@ -107,11 +110,13 @@
         "AUTHOR_DELETED": "Autor Eliminado!"
     },
     "AUTHOR": {
+        "AUTHOR_TITLE": "Autores",
         "ID": "Id",
         "NAME": "Nombre",
         "LAST_NAME": "Apellido",
         "AUTHOR_LIST": "Lista Autores",
         "ADD_AUTHOR_TITLE": "Crear Autor",
-        "CONSULT_AUTHOR_TITLE": "Consultar Autor"
+        "CONSULT_AUTHOR_TITLE": "Consultar Autor",
+        "LAST_AUTHOR_RECORDS": "Últimos Autores Registrados"
     }
 }

@@ -24,8 +24,12 @@ const routes: Routes = [
     loadChildren: () => import('./components/autores/autores.module').then(m => m.AutoresModule)
   },
   {
+    path: 'principal',
+    loadChildren: () => import('./components/principal/principal.module').then(m => m.PrincipalModule)
+  },
+  {
     path: '',
-    redirectTo: '',
+    redirectTo: 'principal',
     pathMatch: 'full'
   }
 ];

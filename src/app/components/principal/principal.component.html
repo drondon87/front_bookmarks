@@ -1,0 +1,54 @@
+<div class="card mb-3">
+    <div class="card-header text-center bg-card text-white"> {{ "AUTHOR.LAST_AUTHOR_RECORDS" | translate}} </div>
+    <div class="card-body txt-content">
+        <ngx-datatable class="material" [rows]="dataAutores" [columns]="colsAutores" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [selected]="selectedAutor" [selectionType]="SelectionType.single" (select)="onSelectAutor($event)">
+        </ngx-datatable>
+        <ng-template #hdrTpl let-column="column">{{ column.name }}</ng-template>
+        <ng-template #editTmpl let-row="row" let-column="column" let-value="value">
+            <ng-container>
+                {{ value }}
+            </ng-container>
+        </ng-template>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-header text-center bg-card text-white"> {{ "CHAPTERS.LAST_CHAPTERS_RECORDS" | translate}} </div>
+    <div class="card-body txt-content">
+        <ngx-datatable class="material" [rows]="dataCapitulos" [columns]="colsCapitulos" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10" [selected]="selectedCapitulo" [selectionType]="SelectionType.single"
+            (select)="onSelectCapitulo($event)">
+        </ngx-datatable>
+        <ng-template #hdrTpl let-column="column">{{ column.name }}</ng-template>
+        <ng-template #editTmpl let-row="row" let-column="column" let-value="value">
+            <ng-container>
+                {{ value }}
+            </ng-container>
+        </ng-template>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-header text-center bg-card text-white"> {{ "BOOK.LAST_BOOK_RECORDS" | translate}} </div>
+    <div class="card-body txt-content">
+        <ngx-datatable class="material" [rows]="dataLibros" [columns]="colsLibros" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [selected]="selectedLibro" [selectionType]="SelectionType.single" (select)="onSelectLibro($event)">
+        </ngx-datatable>
+        <ng-template #hdrTpl let-column="column">{{ column.name }}</ng-template>
+        <ng-template #editTmpl let-row="row" let-column="column" let-value="value">
+            <ng-container>
+                {{ value }}
+            </ng-container>
+        </ng-template>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-header text-center bg-card text-white"> {{ "BOOK_MARKS.LAST_BOOK_MARKS_RECORDS" | translate}} </div>
+    <div class="card-body txt-content">
+        <ngx-datatable class="material" [rows]="dataMarcaLibros" [columns]="colsMarcaLibros" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [selected]="selectedMarcaLibro" [selectionType]="SelectionType.single"
+            (select)="onSelectMarcaLibro($event)">
+        </ngx-datatable>
+        <ng-template #hdrTpl let-column="column">{{ column.name }}</ng-template>
+        <ng-template #editTmpl let-row="row" let-column="column" let-value="value">
+            <ng-container>
+                {{ value }}
+            </ng-container>
+        </ng-template>
+    </div>
+</div>

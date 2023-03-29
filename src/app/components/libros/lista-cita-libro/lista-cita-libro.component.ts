@@ -42,7 +42,7 @@ export class ListaCitaLibroComponent implements OnInit {
       this.citasLibros = resp as CitaLibro[];
       this.data = this.citasLibros;
     });
-    
+
   }
 
   public crearCitaLibro(){
@@ -59,7 +59,8 @@ export class ListaCitaLibroComponent implements OnInit {
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
-        name: this._translateService.instant('BOOK_DATES.AUTHOR')
+        name: this._translateService.instant('BOOK_DATES.AUTHOR'),
+        prop: 'libro.autor.nombre'
       }
     ];
   }
