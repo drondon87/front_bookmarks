@@ -1,3 +1,38 @@
 <div class="card mt-2">
     <div class="card-header text-center bg-card text-white">{{ "BOOK_DATES.BOOK_DATE_TITLE" | translate}}</div>
+    <div class="card-body txt-content">
+        <form [formGroup]="citaLibroForm" (ngSubmit)="guardarCitaLibro()">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK_DATES.DESCRIPTION" | translate}} </label>
+                <input [class.is-invalid]="descripcion.invalid && descripcion.touched" type="text" formControlName="descripcion" class="form-control" required>
+                <small class="text-danger " *ngIf="descripcion.invalid && descripcion.touched ">{{ "VALIDATION.NAME_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK_DATES.PAGES" | translate}} </label>
+                <input [class.is-invalid]="pagina.invalid && pagina.touched" type="text" formControlName="pagina" class="form-control" required>
+                <small class="text-danger " *ngIf="pagina.invalid && pagina.touched ">{{ "VALIDATION.PAGES_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK_DATES.DATE" | translate}}</label>
+                <input [class.is-invalid]="fechaCitaLibro.invalid && fechaCitaLibro.touched" type="text" formControlName="fechaCitaLibro" class="form-control" mask="d0/M0/0000" [leadZeroDateTime]="true" required>
+                <small class="text-danger" *ngIf="fechaCitaLibro.invalid && fechaCitaLibro.touched ">{{ "VALIDATION.DATE_REQUIRED" | translate}}</small>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">{{ "BOOK.BOOK" | translate}}</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" formControlName="libroId">
+                <option *ngFor="let libro of libros" [value]="libro.id"> {{libro.nombre}} </option>
+              </select>
+            </div>
+            <div class="form__content-submit">
+                <button type="submit" *ngIf="!consulta" [disabled]="citaLibroForm.invalid" class="form__submit">
+                      <i class='bx bx-save icon-style'></i>
+                      {{ 'SHARED.BUTTONS.SAVE' | translate }}
+                  </button>
+                <button type="button" *ngIf="consulta" class="form__submit" (click)="eliminarCitaLibro()">
+                      <i class='bx bx-trash icon-style'></i>
+                      {{ 'SHARED.BUTTONS.DELETE' | translate }}
+              </button>
+            </div>
+        </form>
+    </div>
 </div>

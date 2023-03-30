@@ -72,7 +72,10 @@
         "BOOK_DATE_TITLE": "Citas de Libros",
         "BOOK_DATE_LIST": "Listado Citas Libros",
         "ADD_BOOK_DATE_TITLE": "Crear Cita Libro",
-        "AUTHOR": "Autor"
+        "AUTHOR": "Autor",
+        "DESCRIPTION": "Descripción",
+        "PAGES": "Páginas",
+        "DATE": "Fecha"
     },
     "VALIDATION": {
         "NAME_REQUIRED": "Nombre es requerido",
@@ -108,7 +111,9 @@
         "AUTHOR_ADD": "Nuevo Autor",
         "AUTHOR_ADD_TEXT": "El autor ",
         "AUTHOR_DELETE_ASK": "¿Seguro que desea eliminar el autor ",
-        "AUTHOR_DELETED": "Autor Eliminado!"
+        "AUTHOR_DELETED": "Autor Eliminado!",
+        "BOOK_DATE_ADD": "Nueva Cita Libro",
+        "BOOK_DATE_ADD_TEXT": "La cita libro"
     },
     "AUTHOR": {
         "AUTHOR_TITLE": "Autores",

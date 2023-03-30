@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { CitaLibro } from '../models/citaLibro.model';
 import { map, catchError } from 'rxjs/operators';
 import { CreateCitaLibro } from '../models/create.citaLibro.model';
+import { BookmarkResponse } from '../models/bookmark.response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +26,9 @@ export class CitaLibroService {
     );
   }
 
-  public crearCitaLibro(createCitaLibro: CreateCitaLibro): Observable<CitaLibro> {
+  public crearCitaLibro(createCitaLibro: CreateCitaLibro): Observable<BookmarkResponse> {
     return this.http.post(`${this.urlEndpoint}/citalibro`, createCitaLibro).pipe(
-      map((resp: any) => resp['data'] as CitaLibro),
+      map((resp: any) => resp as BookmarkResponse),
       catchError(err => {
         return throwError(err);
       })

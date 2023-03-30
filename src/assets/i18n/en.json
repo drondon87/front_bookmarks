@@ -72,7 +72,10 @@
         "BOOK_DATE_TITLE": "Book Dates",
         "BOOK_DATE_LIST": "Book Dates List",
         "ADD_BOOK_DATE_TITLE": "Add Book Date",
-        "AUTHOR": "Author"
+        "AUTHOR": "Author",
+        "DESCRIPTION": "Description",
+        "PAGES": "Pages",
+        "DATE": "Date"
     },
     "VALIDATION": {
         "NAME_REQUIRED": "Name is required",
@@ -108,7 +111,9 @@
         "AUTHOR_ADD": "Add Author",
         "AUTHOR_ADD_TEXT": "The author ",
         "AUTHOR_DELETE_ASK": "Are you sure do you want delete this author ",
-        "AUTHOR_DELETED": "Author deleted!"
+        "AUTHOR_DELETED": "Author deleted!",
+        "BOOK_DATE_ADD": "Add Book Date",
+        "BOOK_DATE_ADD_TEXT": "Book Date"
     },
     "AUTHOR": {
         "AUTHOR_TITLE": "Authors",
