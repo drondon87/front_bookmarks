@@ -9,6 +9,9 @@ import { MarcaLibro } from '../../../models/marcaLibro.model';
 import { MarcaLibroService } from '../../../services/marca-libro.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SelectionType, ColumnMode } from '@swimlane/ngx-datatable';
+import { BookmarkResponse } from 'src/app/models/bookmark.response.model';
+import { LibroService } from '../../../services/libro.service';
+import { Libro } from 'src/app/models/libro.model';
 
 @Component({
   selector: 'app-detalle-capitulo',
@@ -27,6 +30,8 @@ export class DetalleCapituloComponent implements OnInit {
   public libroId: number = 0;
   public marcasLibros: MarcaLibro[] = [];
   public capituloId: number = 0;
+  public libro: Libro = new Libro();
+  public libros: Libro[] = [];
 
   public cols = [];
   public selected = [];
@@ -45,8 +50,9 @@ export class DetalleCapituloComponent implements OnInit {
               private router: Router,
               private _capituloService: CapituloService,
               private _marcaLibroService: MarcaLibroService,
-              private _translateService: TranslateService) { }
-  
+              private _translateService: TranslateService,
+              private _libroService: LibroService) { }
+
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       let libroId:number = +params.get('libroId');
@@ -54,15 +60,16 @@ export class DetalleCapituloComponent implements OnInit {
       if(libroId !== 0 && id === 0){
         this.consulta=false;
         this.libroId = libroId;
+        this._libroService.obtenerLibro(this.libroId).subscribe(resp => this.libro = resp);
       }else if(libroId === 0 && id !== 0){
         this.consulta=true;
-
         this._capituloService.obtenerCapitulo(id).subscribe(capitulo => this.asignarValores(capitulo));
         this.initColumnsTable();
         this._marcaLibroService.getMarcasLibrosByCapitulo(id).subscribe(marcas => {
           this.marcasLibros = marcas;
         });
       }
+      this._libroService.getLibros().subscribe(resp => this.libros = resp);
     });
     this.initForm();
   }
@@ -71,24 +78,34 @@ export class DetalleCapituloComponent implements OnInit {
     this.capituloForm = this.fb.group({
       numero: [{value:'' , disabled: this.consulta}, Validators.required],
       nombre: [{value:'' , disabled: this.consulta}, Validators.required],
-      descripcion: [{value:'' , disabled: this.consulta}, Validators.required]
+      descripcion: [{value:'' , disabled: this.consulta}, Validators.required],
+      libroId: [{value:this.libroId , disabled: true}]
     });
   }
-  
+
   guardarCapitulo(){
     if(this.capituloForm.invalid){ return;}
 
     const { numero, nombre, descripcion } = this.capituloForm.value;
-  
+
     this.createCapitulo.numero = numero;
     this.createCapitulo.nombre = nombre;
     this.createCapitulo.descripcion = descripcion;
-    this.createCapitulo.libroId = this.libroId;
+    this.createCapitulo.libro = this.libro;
 
     this._capituloService.crearCapitulo(this.createCapitulo)
-      .subscribe(capitulo => {
-        Swal.fire('Nuevo Capitulo', `El capitulo ${capitulo.nombre} ha sido creado con exito`,'success');
-        this.router.navigate(['/capitulos']);
+      .subscribe((resp: BookmarkResponse) => {
+        if(resp.data === null){
+          console.log(resp);
+          Swal.fire({
+            title: `${resp.message} !!!`,
+            text: resp.errors.libro,
+            icon: 'error'
+          })
+        }else{
+          Swal.fire('Nuevo Capitulo', `El capitulo ${resp.data.nombre} ha sido creado con exito`,'success');
+          this.router.navigate(['/capitulos']);
+        }
       },
       err => {
         Swal.fire({
@@ -103,10 +120,12 @@ export class DetalleCapituloComponent implements OnInit {
     this.capituloForm.setValue({
       nombre: capitulo.nombre,
       descripcion: capitulo.descripcion,
-      numero: capitulo.numero
+      numero: capitulo.numero,
+      libroId: capitulo.libro.id
     });
     this.capituloId = capitulo.id;
     this.capitulo = capitulo;
+    this.libroId = capitulo.libro.id;
   }
 
   eliminarCapitulo(){

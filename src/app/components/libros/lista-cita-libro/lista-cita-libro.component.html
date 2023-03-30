@@ -7,7 +7,7 @@
                 <option *ngFor="let libro of libros" [value]="libro.id"> {{libro.nombre}} </option>
             </select>
             <button type="button" (click)="buscarCitasLibro()" class="form__submit">{{ "SHARED.BUTTONS.SEARCH" | translate }}</button>
-            <button *ngIf="citasLibros?.length > 0" type="button" (click)="crearCitaLibro()" class="form__submit">{{ "SHARED.BUTTONS.ADD_BOOK_DATE" | translate }}</button>
+            <button *ngIf="libroId > 0" type="button" (click)="crearCitaLibro()" class="form__submit">{{ "SHARED.BUTTONS.ADD_BOOK_DATE" | translate }}</button>
         </div>
         <div *ngIf="citasLibros?.length == 0" class="alert alert-info mt-3 mb-2">
             {{ "VALIDATION.WARNING_LIST" | translate }}

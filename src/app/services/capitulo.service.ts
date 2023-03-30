@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { CreateCapitulo } from '../models/create.capitulo.model';
+import { BookmarkResponse } from '../models/bookmark.response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,9 +47,9 @@ export class CapituloService {
     );
   }
 
-  public crearCapitulo(createCapitulo: CreateCapitulo): Observable<Capitulo> {
+  public crearCapitulo(createCapitulo: CreateCapitulo): Observable<BookmarkResponse> {
     return this.http.post(`${this.urlEndpoint}/${this.controller}`, createCapitulo).pipe(
-      map((resp: any) => resp['data'] as Capitulo),
+      map((resp: any) => resp as BookmarkResponse),
       catchError(err => {
         return throwError(err);
       })

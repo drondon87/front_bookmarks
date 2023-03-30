@@ -45,7 +45,8 @@
         "DESCRIPTION": "Descripción",
         "DATE": "Fecha",
         "AUTHOR": "Autor",
-        "LAST_BOOK_RECORDS": "Últimos Libros Registrados"
+        "LAST_BOOK_RECORDS": "Últimos Libros Registrados",
+        "BOOK": "Libro"
     },
     "CHAPTERS": {
         "CHAPTER_TITLE": "Capítulos",
