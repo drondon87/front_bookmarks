@@ -12,7 +12,7 @@
                 <input [class.is-invalid]="pagina.invalid && pagina.touched" type="text" formControlName="pagina" class="form-control" required>
                 <small class="text-danger " *ngIf="pagina.invalid && pagina.touched ">{{ "VALIDATION.PAGES_REQUIRED" | translate}}</small>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" *ngIf="consulta">
                 <label class="col-form-label col-sm-2">{{ "BOOK_DATES.DATE" | translate}}</label>
                 <input [class.is-invalid]="fechaCitaLibro.invalid && fechaCitaLibro.touched" type="text" formControlName="fechaCitaLibro" class="form-control" mask="d0/M0/0000" [leadZeroDateTime]="true" required>
                 <small class="text-danger" *ngIf="fechaCitaLibro.invalid && fechaCitaLibro.touched ">{{ "VALIDATION.DATE_REQUIRED" | translate}}</small>

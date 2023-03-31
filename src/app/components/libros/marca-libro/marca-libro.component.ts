@@ -6,6 +6,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CreateMarcaLibro } from '../../../models/create.marcaLibro.model';
 import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
+import { CapituloService } from 'src/app/services/capitulo.service';
+import { Capitulo } from 'src/app/models/capitulo.model';
 
 @Component({
   selector: 'app-marca-libro',
@@ -19,18 +21,20 @@ export class MarcaLibroComponent implements OnInit {
   public marcaLibroForm: FormGroup;
   public createMarcaLibro: CreateMarcaLibro = new CreateMarcaLibro();
   public capituloId: number = 0;
+  public capitulo: Capitulo = new Capitulo();
 
   constructor(private activatedRoute: ActivatedRoute,
               private _marcaLibroService: MarcaLibroService,
               private fb: FormBuilder,
               private router: Router,
-              private _translateService: TranslateService) { }
-  
+              private _translateService: TranslateService,
+              private _capituloService: CapituloService) { }
+
   get descripcion(){ return this.marcaLibroForm.get('descripcion'); }
 
   get paginas(){ return this.marcaLibroForm.get('paginas'); }
 
-  get capitulo(){ return this.marcaLibroForm.get('capitulo'); }
+  get capituloF(){ return this.marcaLibroForm.get('capituloF'); }
 
   get resumen(){ return this.marcaLibroForm.get('resumen'); }
 
@@ -47,6 +51,7 @@ export class MarcaLibroComponent implements OnInit {
         });
       }
     });
+    this._capituloService.obtenerCapitulo(this.capituloId).subscribe(capitulo => this.capitulo = capitulo);
     this.initForm();
   }
 
@@ -54,8 +59,8 @@ export class MarcaLibroComponent implements OnInit {
     this.marcaLibroForm = this.fb.group({
       descripcion: [{value:'' , disabled: this.consulta}, Validators.required],
       paginas: [{value:'' , disabled: this.consulta}, Validators.required],
-      capitulo: [{value:'' , disabled: true}, Validators.required],
-      resumen: [{value:'' , disabled: this.consulta}] 
+      capituloF: [{value: '' , disabled: this.consulta}, Validators.required],
+      resumen: [{value:'' , disabled: this.consulta}]
     });
   }
 
@@ -63,7 +68,7 @@ export class MarcaLibroComponent implements OnInit {
     this.marcaLibroForm.setValue({
       descripcion: marcaLibro.descripcion,
       paginas: marcaLibro.paginas ,
-      capitulo: marcaLibro.capitulo.nombre,
+      capituloF: marcaLibro.capitulo.nombre,
       resumen: marcaLibro.resumen
     });
   }
@@ -76,7 +81,7 @@ export class MarcaLibroComponent implements OnInit {
     this.createMarcaLibro.descripcion = descripcion;
     this.createMarcaLibro.paginas = paginas;
     this.createMarcaLibro.resumen = resumen;
-    this.createMarcaLibro.capituloId = this.capituloId;
+    this.createMarcaLibro.capitulo = this.capitulo;
 
     this._marcaLibroService.crearMarcaLibro(this.createMarcaLibro)
       .subscribe(marcaLibro => {
@@ -124,7 +129,7 @@ export class MarcaLibroComponent implements OnInit {
             icon: 'error'
           })
         });
-        
+
       }
     })
   }

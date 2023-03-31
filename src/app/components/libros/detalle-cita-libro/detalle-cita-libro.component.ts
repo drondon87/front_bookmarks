@@ -64,13 +64,12 @@ export class DetalleCitaLibroComponent implements OnInit {
       pagina: citaLibro.pagina,
       libroId: citaLibro.libro.id,
     });
-    console.log(this.citaLibro);
   }
 
   public initForm(): void {
     this.citaLibroForm = this.fb.group({
       descripcion: [{value:'' , disabled: this.consulta}, Validators.required],
-      fechaCitaLibro: [{value:'' , disabled: this.consulta}, Validators.required],
+      fechaCitaLibro: [{value:'' , disabled: true}],
       pagina: [{value:'' , disabled: this.consulta}, Validators.required],
       libroId: [{value:this.libroId , disabled: true}]
     });
@@ -79,10 +78,9 @@ export class DetalleCitaLibroComponent implements OnInit {
   public guardarCitaLibro() : void {
     if(this.citaLibroForm.invalid){ return;}
 
-    const { descripcion, fechaCitaLibro, pagina } = this.citaLibroForm.value;
+    const { descripcion, pagina } = this.citaLibroForm.value;
 
     this.createCitaLibro.descripcion = descripcion;
-    this.createCitaLibro.createAt = '2023-10-22';
     this.createCitaLibro.pagina = pagina;
     this.createCitaLibro.libro = this.libro;
 
@@ -110,8 +108,35 @@ export class DetalleCitaLibroComponent implements OnInit {
 
   }
 
-  public eliminarCitaLibro() : void {
-
+  public eliminarCitaLibro(): void {
+    Swal.fire({
+      title: this._translateService.instant('DIALOG.DELETE_TITLE'),
+      text: `${this._translateService.instant('DIALOG.BOOK_DATE_DELETE_ASK')} ${this.citaLibro.descripcion} ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: this._translateService.instant('DIALOG.DELETE_YES'),
+      cancelButtonText: this._translateService.instant('DIALOG.DELETE_NO'),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._citaLibroService.borrarCitaLibro(this.citaLibro.id).subscribe(resp => {
+          Swal.fire(
+            this._translateService.instant('DIALOG.BOOK_DATE_DELETED'),
+            `${resp}`,
+            'success'
+          )
+          this.router.navigate(['libros/citaslibro']);
+        },
+        err => {
+          Swal.fire({
+            title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+            text:  err.error.error,
+            icon: 'error'
+          })
+        });
+      }
+    })
   }
 
 

@@ -62,7 +62,7 @@ export class DetalleLibroComponent implements OnInit {
     this.libroForm = this.fb.group({
       nombre: [{value:'' , disabled: this.consulta}, Validators.required],
       descripcion: [{value:'' , disabled: this.consulta}, Validators.required],
-      fechaLibro: [{value:'' , disabled: this.consulta}, Validators.required],
+      fechaLibro: [{value:'' , disabled: this.consulta}],
       categoriaId: [{value:'' , disabled: this.consulta}, Validators.required],
       autorId: [{value:'' , disabled: this.consulta}, Validators.required]
     });
@@ -86,7 +86,6 @@ export class DetalleLibroComponent implements OnInit {
 
     this.createLibro.nombre = nombre;
     this.createLibro.descripcion= descripcion;
-    this.createLibro.fechaLibro = fechaLibro;
     this.createLibro.categoriaId = categoriaId;
     this.createLibro.autorId = autorId;
 

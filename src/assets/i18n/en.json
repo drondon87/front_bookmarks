@@ -113,7 +113,9 @@
         "AUTHOR_DELETE_ASK": "Are you sure do you want delete this author ",
         "AUTHOR_DELETED": "Author deleted!",
         "BOOK_DATE_ADD": "Add Book Date",
-        "BOOK_DATE_ADD_TEXT": "Book Date"
+        "BOOK_DATE_ADD_TEXT": "Book Date",
+        "BOOK_DATE_DELETE_ASK": "Are you sure do you want delete this book date",
+        "BOOK_DATE_DELETED": "Book Date deleted!"
     },
     "AUTHOR": {
         "AUTHOR_TITLE": "Authors",

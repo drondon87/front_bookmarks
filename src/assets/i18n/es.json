@@ -113,7 +113,9 @@
         "AUTHOR_DELETE_ASK": "¿Seguro que desea eliminar el autor ",
         "AUTHOR_DELETED": "Autor Eliminado!",
         "BOOK_DATE_ADD": "Nueva Cita Libro",
-        "BOOK_DATE_ADD_TEXT": "La cita libro"
+        "BOOK_DATE_ADD_TEXT": "La cita libro",
+        "BOOK_DATE_DELETE_ASK": "¿Seguro que desea eliminar la cita libro ",
+        "BOOK_DATE_DELETED": "Cita Libro Eliminada!"
     },
     "AUTHOR": {
         "AUTHOR_TITLE": "Autores",
