@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Autor } from 'src/app/models/autor.model';
+import { BookmarkResponse } from 'src/app/models/bookmark.response.model';
 import { AutorService } from 'src/app/services/autor.service';
 import Swal from 'sweetalert2';
 
@@ -89,13 +90,21 @@ export class DetalleAutorComponent implements OnInit {
       cancelButtonText: this._translateService.instant('DIALOG.DELETE_NO'),
     }).then((result) => {
       if (result.isConfirmed) {
-        this._autorService.borrarAutor(this.autor.id).subscribe(resp => {
-          Swal.fire(
-            this._translateService.instant('DIALOG.AUTHOR_DELETED'),
-            `${resp}`,
-            'success'
-          )
-          this.router.navigate(['autores']);
+        this._autorService.borrarAutor(this.autor.id).subscribe((resp: BookmarkResponse) => {
+          if(resp.status === 'OK'){
+            Swal.fire(
+              this._translateService.instant('DIALOG.AUTHOR_DELETED'),
+              `${resp}`,
+              'success'
+            )
+            this.router.navigate(['autores']);
+          }else{
+            Swal.fire({
+              title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+              text:  resp.message,
+              icon: 'error'
+            })
+          }
         },
         err => {
           Swal.fire({

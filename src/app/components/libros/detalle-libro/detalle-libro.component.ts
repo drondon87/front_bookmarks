@@ -11,6 +11,7 @@ import { formatDate } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { Autor } from 'src/app/models/autor.model';
 import { AutorService } from 'src/app/services/autor.service';
+import { BookmarkResponse } from 'src/app/models/bookmark.response.model';
 
 @Component({
   selector: 'app-detalle-libro',
@@ -123,13 +124,22 @@ export class DetalleLibroComponent implements OnInit {
       cancelButtonText: this._translateService.instant('DIALOG.DELETE_NO'),
     }).then((result) => {
       if (result.isConfirmed) {
-        this._libroService.borrarLibro(this.libro.id).subscribe(resp => {
-          Swal.fire(
-            this._translateService.instant('DIALOG.BOOK_DELETED'),
-            `${resp}`,
-            'success'
-          )
-          this.router.navigate(['libros']);
+        this._libroService.borrarLibro(this.libro.id).subscribe((resp: BookmarkResponse) => {
+          if(resp.status === 'OK'){
+            Swal.fire(
+              this._translateService.instant('DIALOG.BOOK_DELETED'),
+              `${resp}`,
+              'success'
+            )
+            this.router.navigate(['libros']);
+          }else{
+            Swal.fire({
+              title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+              text:  resp.message,
+              icon: 'error'
+            })
+          }
+
         },
         err => {
           Swal.fire({

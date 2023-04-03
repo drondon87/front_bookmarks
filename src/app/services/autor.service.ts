@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { Autor } from '../models/autor.model';
 import { catchError, map } from 'rxjs/operators';
 import { CreateAutor } from '../models/create.autor.model';
+import { BookmarkResponse } from '../models/bookmark.response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +27,10 @@ export class AutorService {
     );
   }
 
-  public borrarAutor(id: number): Observable<string> {
+  public borrarAutor(id: number): Observable<BookmarkResponse> {
     return this.http.delete(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
-      map((resp: any) => resp['message'] as string ),
+      map((resp: any) => resp as BookmarkResponse ),
       catchError(err => {
         return throwError(err);
       })

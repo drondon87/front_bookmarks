@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriaService } from '../../../services/categoria.service';
 import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
+import { BookmarkResponse } from 'src/app/models/bookmark.response.model';
 
 @Component({
   selector: 'app-detalle-categoria',
@@ -90,13 +91,22 @@ export class DetalleCategoriaComponent implements OnInit {
       cancelButtonText: this._translateService.instant('DIALOG.DELETE_NO'),
     }).then((result) => {
       if (result.isConfirmed) {
-        this._categoriaService.borrarCategoria(this.categoria.id).subscribe(resp => {
-          Swal.fire(
-            this._translateService.instant('DIALOG.CATEGORY_DELETED'),
-            `${resp}`,
-            'success'
-          )
-          this.router.navigate(['categorias']);
+        this._categoriaService.borrarCategoria(this.categoria.id).subscribe((resp: BookmarkResponse) => {
+          if(resp.status === 'OK'){
+            Swal.fire(
+              this._translateService.instant('DIALOG.CATEGORY_DELETED'),
+              `${resp.message}`,
+              'success'
+            )
+            this.router.navigate(['categorias']);
+          }else{
+            Swal.fire({
+              title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
+              text:  resp.message,
+              icon: 'error'
+            })
+          }
+
         },
         err => {
           Swal.fire({
@@ -105,7 +115,7 @@ export class DetalleCategoriaComponent implements OnInit {
             icon: 'error'
           })
         });
-        
+
       }
     })
   }

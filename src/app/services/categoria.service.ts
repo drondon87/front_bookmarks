@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { BookmarkResponse } from '../models/bookmark.response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +26,10 @@ export class CategoriaService {
     );
   }
 
-  public borrarCategoria(id: number): Observable<string> {
+  public borrarCategoria(id: number): Observable<BookmarkResponse> {
     return this.http.delete(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
-      map((resp: any) => resp['message'] as string ),
+      map((resp: any) => resp as BookmarkResponse ),
       catchError(err => {
         return throwError(err);
       })
