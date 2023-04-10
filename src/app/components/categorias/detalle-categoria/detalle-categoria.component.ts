@@ -24,9 +24,9 @@ export class DetalleCategoriaComponent implements OnInit {
               private router: Router,
               private _translateService: TranslateService) { }
 
-  get nombre(){ return this.categoriaForm.get('nombre'); }
+  get nombre(): any { return this.categoriaForm.get('nombre'); }
 
-  get descripcion(){ return this.categoriaForm.get('descripcion'); }
+  get descripcion(): any { return this.categoriaForm.get('descripcion'); }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {

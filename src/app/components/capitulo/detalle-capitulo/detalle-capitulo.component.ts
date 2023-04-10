@@ -39,11 +39,11 @@ export class DetalleCapituloComponent implements OnInit {
   public ColumnMode = ColumnMode;
 
 
-  get numero(){ return this.capituloForm.get('numero'); }
+  get numero(): any { return this.capituloForm.get('numero'); }
 
-  get nombre(){ return this.capituloForm.get('nombre'); }
+  get nombre(): any { return this.capituloForm.get('nombre'); }
 
-  get descripcion(){ return this.capituloForm.get('descripcion'); }
+  get descripcion(): any { return this.capituloForm.get('descripcion'); }
 
   constructor(private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,

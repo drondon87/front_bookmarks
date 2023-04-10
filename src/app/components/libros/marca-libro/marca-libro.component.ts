@@ -30,13 +30,13 @@ export class MarcaLibroComponent implements OnInit {
               private _translateService: TranslateService,
               private _capituloService: CapituloService) { }
 
-  get descripcion(){ return this.marcaLibroForm.get('descripcion'); }
+  get descripcion(): any { return this.marcaLibroForm.get('descripcion'); }
 
-  get paginas(){ return this.marcaLibroForm.get('paginas'); }
+  get paginas(): any { return this.marcaLibroForm.get('paginas'); }
 
-  get capituloF(){ return this.marcaLibroForm.get('capituloF'); }
+  get capituloF(): any { return this.marcaLibroForm.get('capituloF'); }
 
-  get resumen(){ return this.marcaLibroForm.get('resumen'); }
+  get resumen(): any { return this.marcaLibroForm.get('resumen'); }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {

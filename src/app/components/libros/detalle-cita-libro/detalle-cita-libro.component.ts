@@ -33,11 +33,11 @@ export class DetalleCitaLibroComponent implements OnInit {
               private _translateService: TranslateService,
               private router: Router) { }
 
-    get descripcion(){ return this.citaLibroForm.get('descripcion'); }
+    get descripcion(): any { return this.citaLibroForm.get('descripcion'); }
 
-    get pagina(){ return this.citaLibroForm.get('pagina'); }
+    get pagina(): any { return this.citaLibroForm.get('pagina'); }
 
-    get fechaCitaLibro(){ return this.citaLibroForm.get('fechaCitaLibro'); }
+    get fechaCitaLibro(): any { return this.citaLibroForm.get('fechaCitaLibro'); }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {

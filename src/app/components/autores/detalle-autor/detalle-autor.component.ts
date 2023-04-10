@@ -25,9 +25,9 @@ export class DetalleAutorComponent implements OnInit {
               private _translateService: TranslateService
             ) { }
 
-  get nombre() { return this.autorForm.get('nombre'); }
+  get nombre(): any { return this.autorForm.get('nombre'); }
 
-  get apellido(){ return this.autorForm.get('apellido'); }
+  get apellido(): any { return this.autorForm.get('apellido'); }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {

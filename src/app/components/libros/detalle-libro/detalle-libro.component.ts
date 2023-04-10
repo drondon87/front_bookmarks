@@ -35,15 +35,15 @@ export class DetalleLibroComponent implements OnInit {
               private _translateService: TranslateService,
               private _autorService: AutorService) { }
 
-  get nombre(){ return this.libroForm.get('nombre'); }
+  get nombre(): any { return this.libroForm.get('nombre'); }
 
-  get descripcion(){ return this.libroForm.get('descripcion'); }
+  get descripcion(): any { return this.libroForm.get('descripcion'); }
 
-  get fechaLibro(){ return this.libroForm.get('fechaLibro'); }
+  get fechaLibro(): any { return this.libroForm.get('fechaLibro'); }
 
-  get categoriaId(){ return this.libroForm.get('categoriaId'); }
+  get categoriaId(): any { return this.libroForm.get('categoriaId'); }
 
-  get autorId(){ return this.libroForm.get('autorId'); }
+  get autorId(): any { return this.libroForm.get('autorId'); }
 
   ngOnInit(): void {
 
