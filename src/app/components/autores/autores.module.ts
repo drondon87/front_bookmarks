@@ -21,7 +21,7 @@ import { DetalleAutorComponent } from './detalle-autor/detalle-autor.component';
     NgxDatatableModule,
     NgxMaskModule.forChild()
   ],
-  exports:[
+  exports: [
     ListaAutorComponent,
     DetalleAutorComponent
   ]

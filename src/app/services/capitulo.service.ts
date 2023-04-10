@@ -13,11 +13,11 @@ import { BookmarkResponse } from '../models/bookmark.response.model';
 export class CapituloService {
 
   private urlEndpoint: string = environment.urlEndpoint;
-  private controller: string = 'capitulos';
+  private controller = 'capitulos';
 
   constructor(private http: HttpClient) { }
 
-  public getCapitulosByLIbro(id: number) : Observable<Capitulo[]>  {
+  public getCapitulosByLIbro(id: number): Observable<Capitulo[]>  {
     return this.http.get(`${this.urlEndpoint}/${this.controller}/libro/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Capitulo[] ),
@@ -27,7 +27,7 @@ export class CapituloService {
     );
   }
 
-  public getCapitulosByLibroAndPage(id: number, page: number) : Observable<any[]>  {
+  public getCapitulosByLibroAndPage(id: number, page: number): Observable<any[]>  {
     return this.http.get(`${this.urlEndpoint}/${this.controller}/libro/${id}/page/${page}`)
     .pipe(
       map((resp: any) => resp['data']),
@@ -56,7 +56,7 @@ export class CapituloService {
     );
   }
 
-  public obtenerCapitulo(id: number) : Observable<Capitulo> {
+  public obtenerCapitulo(id: number): Observable<Capitulo> {
     return this.http.get(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Capitulo ),

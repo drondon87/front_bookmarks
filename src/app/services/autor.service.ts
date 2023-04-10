@@ -13,11 +13,11 @@ import { BookmarkResponse } from '../models/bookmark.response.model';
 export class AutorService {
 
   private urlEndpoint: string = environment.urlEndpoint;
-  private controller: string = 'autores';
+  private controller = 'autores';
 
   constructor(private http: HttpClient) { }
 
-  public getAutores() : Observable<Autor[]>  {
+  public getAutores(): Observable<Autor[]>  {
     return this.http.get(`${this.urlEndpoint}/${this.controller}`)
     .pipe(
       map((resp: any) => resp['data'] as Autor[] ),
@@ -46,7 +46,7 @@ export class AutorService {
     );
   }
 
-  public obtenerAutor(id: number) : Observable<Autor> {
+  public obtenerAutor(id: number): Observable<Autor> {
     return this.http.get(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Autor ),

@@ -37,8 +37,8 @@ export class PrincipalComponent implements OnInit {
   public ColumnMode = ColumnMode;
 
   constructor(private _consultaService: ConsultaService,
-    private _translateService: TranslateService,
-    private router: Router) { }
+              private _translateService: TranslateService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.initColumnsTableAutor();
@@ -119,20 +119,20 @@ export class PrincipalComponent implements OnInit {
     ];
   }
 
-  onSelectAutor({ selected }) {
-    this.router.navigate(['/autores/form/',selected[0].id]);
+  onSelectAutor({ selected }): void {
+    this.router.navigate(['/autores/form/', selected[0].id]);
   }
 
-  onSelectCapitulo({ selected }) {
-    this.router.navigate(['/capitulos/form/',selected[0].id]);
+  onSelectCapitulo({ selected }): void {
+    this.router.navigate(['/capitulos/form/', selected[0].id]);
   }
 
-  onSelectLibro({ selected }) {
-    this.router.navigate(['/libros/form/',selected[0].id]);
+  onSelectLibro({ selected }): void {
+    this.router.navigate(['/libros/form/', selected[0].id]);
   }
 
-  onSelectMarcaLibro({ selected }) {
-    this.router.navigate(['/libros/marcalibro/form/',selected[0].capitulo.id,selected[0].id]);
+  onSelectMarcaLibro({ selected }): void {
+    this.router.navigate(['/libros/marcalibro/form/', selected[0].capitulo.id, selected[0].id]);
   }
 
 }

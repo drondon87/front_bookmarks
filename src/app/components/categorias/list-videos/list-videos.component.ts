@@ -18,7 +18,7 @@ export class ListVideosComponent implements OnInit {
 
   ColumnMode = ColumnMode;
 
-  constructor() { 
+  constructor() {
     this.fetch(data => {
       this.data = data.splice(0, 5);
     });
@@ -49,7 +49,7 @@ export class ListVideosComponent implements OnInit {
     ];
   }
 
-  fetch(cb) {
+  fetch(cb): void {
     const req = new XMLHttpRequest();
     req.open('GET', `assets/data/company.json`);
 
@@ -60,11 +60,11 @@ export class ListVideosComponent implements OnInit {
     req.send();
   }
 
-  onSelect({ selected }) {
+  onSelect({ selected }): void {
     console.log('Select Event', selected, this.selected);
   }
 
-  onActivate(event) {
+  onActivate(event): void {
     console.log('Activate Event', event);
   }
 

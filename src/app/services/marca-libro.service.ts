@@ -15,7 +15,7 @@ export class MarcaLibroService {
 
   constructor(private http: HttpClient) { }
 
-  public getMarcasLibrosByCapitulo(id: number) : Observable<MarcaLibro[]>  {
+  public getMarcasLibrosByCapitulo(id: number): Observable<MarcaLibro[]>  {
     return this.http.get(`${this.urlEndpoint}/marcalibro/capitulo/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as MarcaLibro[] ),
@@ -35,7 +35,7 @@ export class MarcaLibroService {
     );
   }
 
-  public obtenerMarcaLibro(id: number) : Observable<MarcaLibro> {
+  public obtenerMarcaLibro(id: number): Observable<MarcaLibro> {
     return this.http.get(`${this.urlEndpoint}/marcalibro/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as MarcaLibro ),

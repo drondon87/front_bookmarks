@@ -15,7 +15,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
-  declarations: [ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent, DetalleCitaLibroComponent],
+  declarations: [ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent,
+    DetalleCitaLibroComponent],
   imports: [
     CommonModule,
     LibrosRoutingModule,
@@ -26,8 +27,9 @@ import { NgxMaskModule } from 'ngx-mask';
     NgxDatatableModule,
     NgxMaskModule.forChild()
   ],
-  exports:[
-    ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent, DetalleCitaLibroComponent
+  exports: [
+    ListaLibroComponent, DetalleLibroComponent, ListaLibroCategoriaComponent, MarcaLibroComponent, ListaCitaLibroComponent,
+    DetalleCitaLibroComponent
   ]
 })
 export class LibrosModule { }

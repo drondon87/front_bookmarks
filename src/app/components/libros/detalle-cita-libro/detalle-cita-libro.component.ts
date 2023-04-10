@@ -19,19 +19,19 @@ import { Libro } from '../../../models/libro.model';
 export class DetalleCitaLibroComponent implements OnInit {
 
   public citaLibro: CitaLibro = new CitaLibro();
-  public consulta: boolean = false;
+  public consulta = false;
   public citaLibroForm: FormGroup;
   public libros: Libro[] = [];
-  public libroId: number = 0;
+  public libroId = 0;
   public libro: Libro = new Libro();
   public createCitaLibro: CreateCitaLibro = new CreateCitaLibro();
 
   constructor(private activatedRoute: ActivatedRoute,
-    private _citaLibroService: CitaLibroService,
-    private _libroService: LibroService,
-    private fb: FormBuilder,
-    private _translateService: TranslateService,
-    private router: Router) { }
+              private _citaLibroService: CitaLibroService,
+              private _libroService: LibroService,
+              private fb: FormBuilder,
+              private _translateService: TranslateService,
+              private router: Router) { }
 
     get descripcion(){ return this.citaLibroForm.get('descripcion'); }
 
@@ -41,13 +41,13 @@ export class DetalleCitaLibroComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      let libroId:number = +params.get('libroId');
-      let id:number = +params.get('id');
-      if(libroId !== 0 && id === 0){
+      const libroId: number = +params.get('libroId');
+      const id: number = +params.get('id');
+      if (libroId !== 0 && id === 0){
         this.libroId = libroId;
-        this.consulta=false;
+        this.consulta = false;
         this._libroService.obtenerLibro(this.libroId).subscribe(resp => this.libro = resp);
-      }else if(libroId === 0 && id !== 0){
+      }else if (libroId === 0 && id !== 0){
         this.consulta = true;
         this._citaLibroService.obtenerCitaLibro(id).subscribe(citaLibro => this.asignarValores(citaLibro));
       }
@@ -56,11 +56,11 @@ export class DetalleCitaLibroComponent implements OnInit {
     this.initForm();
   }
 
-  public asignarValores(citaLibro: CitaLibro) : void {
+  public asignarValores(citaLibro: CitaLibro): void {
     this.citaLibro = citaLibro;
     this.citaLibroForm.setValue({
       descripcion: citaLibro.descripcion,
-      fechaCitaLibro: formatDate(citaLibro.createAt,'dd/MM/yyyy','en') ,
+      fechaCitaLibro: formatDate(citaLibro.createAt, 'dd/MM/yyyy', 'en') ,
       pagina: citaLibro.pagina,
       libroId: citaLibro.libro.id,
     });
@@ -68,15 +68,15 @@ export class DetalleCitaLibroComponent implements OnInit {
 
   public initForm(): void {
     this.citaLibroForm = this.fb.group({
-      descripcion: [{value:'' , disabled: this.consulta}, Validators.required],
-      fechaCitaLibro: [{value:'' , disabled: true}],
-      pagina: [{value:'' , disabled: this.consulta}, Validators.required],
-      libroId: [{value:this.libroId , disabled: true}]
+      descripcion: [{value: '' , disabled: this.consulta}, Validators.required],
+      fechaCitaLibro: [{value: '' , disabled: true}],
+      pagina: [{value: '' , disabled: this.consulta}, Validators.required],
+      libroId: [{value: this.libroId , disabled: true}]
     });
   }
 
-  public guardarCitaLibro() : void {
-    if(this.citaLibroForm.invalid){ return;}
+  public guardarCitaLibro(): void {
+    if (this.citaLibroForm.invalid){ return; }
 
     const { descripcion, pagina } = this.citaLibroForm.value;
 
@@ -86,15 +86,14 @@ export class DetalleCitaLibroComponent implements OnInit {
 
     this._citaLibroService.crearCitaLibro(this.createCitaLibro)
       .subscribe((resp: BookmarkResponse) => {
-        if(resp.data === null){
-          console.log(resp);
+        if (resp.data === null){
           Swal.fire({
             title: `${resp.message} !!!`,
             text: resp.errors.libro,
             icon: 'error'
-          })
-        }else{
-          Swal.fire(this._translateService.instant('DIALOG.BOOK_DATE_ADD'), `${this._translateService.instant('DIALOG.BOOK_DATE_ADD_TEXT')} ${resp.data.nombre} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`,'success');
+          });
+        }else {
+          Swal.fire(this._translateService.instant('DIALOG.BOOK_DATE_ADD'), `${this._translateService.instant('DIALOG.BOOK_DATE_ADD_TEXT')} ${resp.data.nombre} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`, 'success');
           this.router.navigate(['/libros/citaslibro']);
         }
       },
@@ -103,7 +102,7 @@ export class DetalleCitaLibroComponent implements OnInit {
           title: `${this._translateService.instant('DIALOG.ERROR_TITLE')} !!!`,
           text:  err.error.message,
           icon: 'error'
-        })
+        });
       });
 
   }
@@ -125,7 +124,7 @@ export class DetalleCitaLibroComponent implements OnInit {
             this._translateService.instant('DIALOG.BOOK_DATE_DELETED'),
             `${resp}`,
             'success'
-          )
+          );
           this.router.navigate(['libros/citaslibro']);
         },
         err => {
@@ -133,10 +132,10 @@ export class DetalleCitaLibroComponent implements OnInit {
             title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
             text:  err.error.error,
             icon: 'error'
-          })
+          });
         });
       }
-    })
+    });
   }
 
 

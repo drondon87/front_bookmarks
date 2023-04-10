@@ -11,11 +11,11 @@ import { catchError, map } from 'rxjs/operators';
 export class ConsultaService {
 
   private urlEndpoint: string = environment.urlEndpoint;
-  private controller: string = 'consultas';
+  private controller = 'consultas';
 
   constructor(private http: HttpClient) { }
 
-  public getUltimosRegistros() : Observable<ConsultaResponse>  {
+  public getUltimosRegistros(): Observable<ConsultaResponse>  {
     return this.http.get(`${this.urlEndpoint}/${this.controller}`)
     .pipe(
       map((resp: any) => resp['data'] as ConsultaResponse ),

@@ -23,13 +23,13 @@ export class DetalleCapituloComponent implements OnInit {
   @ViewChild('editTmpl', { static: true }) editTmpl: TemplateRef<any>;
   @ViewChild('hdrTpl', { static: true }) hdrTpl: TemplateRef<any>;
 
-  public consulta: boolean = false;
+  public consulta = false;
   public capitulo: Capitulo = new Capitulo();
   public capituloForm: FormGroup;
   public createCapitulo: CreateCapitulo = new CreateCapitulo();
-  public libroId: number = 0;
+  public libroId = 0;
   public marcasLibros: MarcaLibro[] = [];
-  public capituloId: number = 0;
+  public capituloId = 0;
   public libro: Libro = new Libro();
   public libros: Libro[] = [];
 
@@ -55,14 +55,14 @@ export class DetalleCapituloComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      let libroId:number = +params.get('libroId');
-      let id:number = +params.get('id');
-      if(libroId !== 0 && id === 0){
-        this.consulta=false;
+      const libroId: number = +params.get('libroId');
+      const id: number = +params.get('id');
+      if (libroId !== 0 && id === 0){
+        this.consulta = false;
         this.libroId = libroId;
         this._libroService.obtenerLibro(this.libroId).subscribe(resp => this.libro = resp);
-      }else if(libroId === 0 && id !== 0){
-        this.consulta=true;
+      }else if (libroId === 0 && id !== 0) {
+        this.consulta = true;
         this._capituloService.obtenerCapitulo(id).subscribe(capitulo => this.asignarValores(capitulo));
         this.initColumnsTable();
         this._marcaLibroService.getMarcasLibrosByCapitulo(id).subscribe(marcas => {
@@ -76,15 +76,15 @@ export class DetalleCapituloComponent implements OnInit {
 
   public initForm(): void {
     this.capituloForm = this.fb.group({
-      numero: [{value:'' , disabled: this.consulta}, Validators.required],
-      nombre: [{value:'' , disabled: this.consulta}, Validators.required],
-      descripcion: [{value:'' , disabled: this.consulta}, Validators.required],
-      libroId: [{value:this.libroId , disabled: true}]
+      numero: [{value: '' , disabled: this.consulta}, Validators.required],
+      nombre: [{value: '' , disabled: this.consulta}, Validators.required],
+      descripcion: [{value: '' , disabled: this.consulta}, Validators.required],
+      libroId: [{value: this.libroId , disabled: true}]
     });
   }
 
-  guardarCapitulo(){
-    if(this.capituloForm.invalid){ return;}
+  guardarCapitulo(): void{
+    if ( this.capituloForm.invalid ){ return; }
 
     const { numero, nombre, descripcion } = this.capituloForm.value;
 
@@ -95,15 +95,15 @@ export class DetalleCapituloComponent implements OnInit {
 
     this._capituloService.crearCapitulo(this.createCapitulo)
       .subscribe((resp: BookmarkResponse) => {
-        if(resp.data === null){
+        if (resp.data === null){
           console.log(resp);
           Swal.fire({
             title: `${resp.message} !!!`,
             text: resp.errors.libro,
             icon: 'error'
-          })
+          });
         }else{
-          Swal.fire('Nuevo Capitulo', `El capitulo ${resp.data.nombre} ha sido creado con exito`,'success');
+          Swal.fire('Nuevo Capitulo', `El capitulo ${resp.data.nombre} ha sido creado con exito`, 'success');
           this.router.navigate(['/capitulos']);
         }
       },
@@ -112,11 +112,11 @@ export class DetalleCapituloComponent implements OnInit {
           title: `Error ${err.error.status} !!!`,
           text:  err.error.message,
           icon: 'error'
-        })
+        });
       });
   }
 
-  public asignarValores(capitulo: Capitulo) : void {
+  public asignarValores(capitulo: Capitulo): void {
     this.capituloForm.setValue({
       nombre: capitulo.nombre,
       descripcion: capitulo.descripcion,
@@ -128,7 +128,7 @@ export class DetalleCapituloComponent implements OnInit {
     this.libroId = capitulo.libro.id;
   }
 
-  eliminarCapitulo(){
+  eliminarCapitulo(): void{
     Swal.fire({
       title: this._translateService.instant('DIALOG.DELETE_TITLE'),
       text: `${this._translateService.instant('DIALOG.CHAPTER_DELETE_ASK')} ${this.capitulo.nombre} ?`,
@@ -145,7 +145,7 @@ export class DetalleCapituloComponent implements OnInit {
             this._translateService.instant('DIALOG.CHAPTER_DELETED'),
             `${resp}`,
             'success'
-          )
+          );
           this.router.navigate(['/capitulos']);
         },
         err => {
@@ -153,14 +153,14 @@ export class DetalleCapituloComponent implements OnInit {
             title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
             text:  err.error.error,
             icon: 'error'
-          })
+          });
         });
       }
-    })
+    });
   }
 
   public crearMarcaLibro(): void {
-    this.router.navigate(['/libros/marcalibro/form/capitulo/',this.capituloId]);
+    this.router.navigate(['/libros/marcalibro/form/capitulo/', this.capituloId]);
   }
 
   public initColumnsTable(): void {
@@ -178,9 +178,9 @@ export class DetalleCapituloComponent implements OnInit {
     ];
   }
 
-  onSelect({ selected }) {
-    let idMarcaLibro: number = selected[0].id;
-    let capituloId: number = selected[0].capitulo.id;
-    this.router.navigate(['/libros/marcalibro/form/',capituloId,idMarcaLibro]);
+  onSelect({ selected }): void {
+    const idMarcaLibro: number = selected[0].id;
+    const capituloId: number = selected[0].capitulo.id;
+    this.router.navigate(['/libros/marcalibro/form/', capituloId, idMarcaLibro]);
   }
 }

@@ -13,12 +13,11 @@ import { SelectionType, ColumnMode } from '@swimlane/ngx-datatable';
   styleUrls: ['./lista-capitulo.component.css']
 })
 export class ListaCapituloComponent implements OnInit {
-  
   @ViewChild('editTmpl', { static: true }) editTmpl: TemplateRef<any>;
   @ViewChild('hdrTpl', { static: true }) hdrTpl: TemplateRef<any>;
 
   public libros: Libro[] = [];
-  public libroId: number = 0;
+  public libroId = 0;
   public capitulos: Capitulo[] = [];
 
   public cols = [];
@@ -35,7 +34,7 @@ export class ListaCapituloComponent implements OnInit {
     this._libroService.getLibros().subscribe(resp => this.libros = resp);
   }
 
-  buscarCapitulos(){
+  buscarCapitulos(): void{
     this.initColumnsTable();
     this._capituloService.getCapitulosByLIbro(this.libroId).subscribe(resp => {
       this.capitulos = resp as Capitulo[];
@@ -57,12 +56,12 @@ export class ListaCapituloComponent implements OnInit {
     ];
   }
 
-  onSelect({ selected }) {
-    this.router.navigate(['/capitulos/form/',selected[0].id]);
+  onSelect({ selected }): void {
+    this.router.navigate(['/capitulos/form/', selected[0].id]);
   }
 
   crearCapitulo(): void {
-    this.router.navigate(['/capitulos/form/libro/',this.libroId]);
+    this.router.navigate(['/capitulos/form/libro/', this.libroId]);
   }
 
 }

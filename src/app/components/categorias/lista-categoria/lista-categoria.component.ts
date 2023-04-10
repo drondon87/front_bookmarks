@@ -49,8 +49,8 @@ export class ListaCategoriaComponent implements OnInit {
     ];
   }
 
-  onSelect({ selected }) {
-    this.router.navigate(['/categorias/form/',selected[0].id]);
+  onSelect({ selected }): void {
+    this.router.navigate(['/categorias/form/', selected[0].id]);
   }
 
 }

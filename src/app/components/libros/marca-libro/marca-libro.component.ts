@@ -17,10 +17,10 @@ import { Capitulo } from 'src/app/models/capitulo.model';
 export class MarcaLibroComponent implements OnInit {
 
   public marcaLibro: MarcaLibro = new MarcaLibro();
-  public consulta: boolean = false;
+  public consulta = false;
   public marcaLibroForm: FormGroup;
   public createMarcaLibro: CreateMarcaLibro = new CreateMarcaLibro();
-  public capituloId: number = 0;
+  public capituloId = 0;
   public capitulo: Capitulo = new Capitulo();
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -40,10 +40,10 @@ export class MarcaLibroComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      let capituloId:number = +params.get('capituloId');
+      const capituloId: number = +params.get('capituloId');
       this.capituloId = capituloId;
-      let id:number = +params.get('id');
-      if(id !== 0){
+      const id: number = +params.get('id');
+      if (id !== 0){
         this.consulta = true;
         this._marcaLibroService.obtenerMarcaLibro(id).subscribe(marcaLibro => {
           this.marcaLibro = marcaLibro;
@@ -57,14 +57,14 @@ export class MarcaLibroComponent implements OnInit {
 
   public initForm(): void {
     this.marcaLibroForm = this.fb.group({
-      descripcion: [{value:'' , disabled: this.consulta}, Validators.required],
-      paginas: [{value:'' , disabled: this.consulta}, Validators.required],
+      descripcion: [{value: '' , disabled: this.consulta}, Validators.required],
+      paginas: [{value: '' , disabled: this.consulta}, Validators.required],
       capituloF: [{value: '' , disabled: this.consulta}, Validators.required],
-      resumen: [{value:'' , disabled: this.consulta}]
+      resumen: [{value: '' , disabled: this.consulta}]
     });
   }
 
-  public asignarValores(marcaLibro: MarcaLibro) : void {
+  public asignarValores(marcaLibro: MarcaLibro): void {
     this.marcaLibroForm.setValue({
       descripcion: marcaLibro.descripcion,
       paginas: marcaLibro.paginas ,
@@ -73,8 +73,8 @@ export class MarcaLibroComponent implements OnInit {
     });
   }
 
-  public guardarMarcaLibro() : void {
-    if(this.marcaLibroForm.invalid){ return;}
+  public guardarMarcaLibro(): void {
+    if (this.marcaLibroForm.invalid){ return; }
 
     const { descripcion, paginas, resumen } = this.marcaLibroForm.value;
 
@@ -85,15 +85,15 @@ export class MarcaLibroComponent implements OnInit {
 
     this._marcaLibroService.crearMarcaLibro(this.createMarcaLibro)
       .subscribe(marcaLibro => {
-        Swal.fire(this._translateService.instant('DIALOG.BOOK_MARK_ADD'), `${this._translateService.instant('DIALOG.BOOK_MARK_ADD_TEXT')} ${marcaLibro.descripcion} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`,'success');
-        this.router.navigate(['capitulos/form',marcaLibro.capitulo.id]);
+        Swal.fire(this._translateService.instant('DIALOG.BOOK_MARK_ADD'), `${this._translateService.instant('DIALOG.BOOK_MARK_ADD_TEXT')} ${marcaLibro.descripcion} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`, 'success');
+        this.router.navigate(['capitulos/form', marcaLibro.capitulo.id]);
       },
       err => {
         Swal.fire({
           title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
           text:  err.error.error,
           icon: 'error'
-        })
+        });
       });
   }
 
@@ -101,8 +101,7 @@ export class MarcaLibroComponent implements OnInit {
     this.router.navigate(['capitulos/form', this.capituloId]);
   }
 
-  public eliminarMarcaLibro(){
-    console.log(this.marcaLibro);
+  public eliminarMarcaLibro(): void {
     Swal.fire({
       title: this._translateService.instant('DIALOG.DELETE_TITLE'),
       text: `${this._translateService.instant('DIALOG.BOOK_MARK_DELETE_ASK')} ${this.marcaLibro.descripcion} ?`,
@@ -119,7 +118,7 @@ export class MarcaLibroComponent implements OnInit {
             this._translateService.instant('DIALOG.BOOK_MARK_DELETED'),
             `${resp}`,
             'success'
-          )
+          );
           this.router.navigate(['capitulos/form', this.capituloId]);
         },
         err => {
@@ -127,11 +126,9 @@ export class MarcaLibroComponent implements OnInit {
             title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
             text:  err.error.error,
             icon: 'error'
-          })
+          });
         });
-
       }
-    })
+    });
   }
-
 }

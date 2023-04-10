@@ -16,7 +16,7 @@ export class DetalleCategoriaComponent implements OnInit {
 
   public categoria: Categoria = new Categoria();
   public categoriaForm: FormGroup;
-  public consulta: boolean = false;
+  public consulta = false;
 
   constructor(private fb: FormBuilder,
               private activatedRoute: ActivatedRoute,
@@ -30,8 +30,8 @@ export class DetalleCategoriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      let id:number = +params.get('id');
-      if(id !== 0){
+      const id: number = +params.get('id');
+      if (id !== 0){
         this.consulta = true;
         this._categoriaService.obtenerCategoria(id).subscribe(categoria => this.asignarValores(categoria));
       }
@@ -42,12 +42,12 @@ export class DetalleCategoriaComponent implements OnInit {
 
   public initForm(): void {
     this.categoriaForm = this.fb.group({
-      nombre: [{value:'' , disabled: this.consulta}, Validators.required],
-      descripcion: [{value:'' , disabled: this.consulta}, Validators.required]
+      nombre: [{value: '' , disabled: this.consulta}, Validators.required],
+      descripcion: [{value: '' , disabled: this.consulta}, Validators.required]
     });
   }
 
-  public asignarValores(categoria: Categoria) : void {
+  public asignarValores(categoria: Categoria): void {
     this.categoria = categoria;
     this.categoriaForm.setValue({
       nombre: categoria.nombre,
@@ -55,9 +55,9 @@ export class DetalleCategoriaComponent implements OnInit {
     });
   }
 
-  public guardarCategoria() : void {
+  public guardarCategoria(): void {
 
-    if(this.categoriaForm.invalid){ return;}
+    if (this.categoriaForm.invalid){ return; }
 
     const { nombre, descripcion } = this.categoriaForm.value;
 
@@ -66,7 +66,7 @@ export class DetalleCategoriaComponent implements OnInit {
 
     this._categoriaService.crearCategoria(this.categoria)
       .subscribe(categoria => {
-        Swal.fire(this._translateService.instant('DIALOG.CATEGORY_ADD'), `${this._translateService.instant('DIALOG.CATEGORY_ADD_TEXT')} ${categoria.nombre} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`,'success');
+        Swal.fire(this._translateService.instant('DIALOG.CATEGORY_ADD'), `${this._translateService.instant('DIALOG.CATEGORY_ADD_TEXT')} ${categoria.nombre} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`, 'success');
         this.router.navigate(['/categorias']);
       },
       err => {
@@ -74,7 +74,7 @@ export class DetalleCategoriaComponent implements OnInit {
           title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
           text:  err.error.error,
           icon: 'error'
-        })
+        });
       }
     );
   }
@@ -92,19 +92,19 @@ export class DetalleCategoriaComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this._categoriaService.borrarCategoria(this.categoria.id).subscribe((resp: BookmarkResponse) => {
-          if(resp.status === 'OK'){
+          if (resp.status === 'OK'){
             Swal.fire(
               this._translateService.instant('DIALOG.CATEGORY_DELETED'),
               `${resp.message}`,
               'success'
-            )
+            );
             this.router.navigate(['categorias']);
           }else{
             Swal.fire({
               title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
               text:  resp.message,
               icon: 'error'
-            })
+            });
           }
 
         },
@@ -113,11 +113,11 @@ export class DetalleCategoriaComponent implements OnInit {
             title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
             text:  err.error.error,
             icon: 'error'
-          })
+          });
         });
 
       }
-    })
+    });
   }
 
 }

@@ -1,5 +1,4 @@
-import { Capitulo } from "./capitulo.model";
-
+import { Capitulo } from './capitulo.model';
 export class CreateMarcaLibro {
     descripcion: string;
     paginas: string;

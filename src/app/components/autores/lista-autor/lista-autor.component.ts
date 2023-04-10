@@ -24,8 +24,8 @@ export class ListaAutorComponent implements OnInit {
   public autores: Autor[] = [];
 
   constructor(private _autorService: AutorService,
-    private _translateService: TranslateService,
-    private router: Router) { }
+              private _translateService: TranslateService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.initColumnsTable();
@@ -52,8 +52,8 @@ export class ListaAutorComponent implements OnInit {
     ];
   }
 
-  onSelect({ selected }) {
-    this.router.navigate(['/autores/form/',selected[0].id]);
+  onSelect({ selected }): void {
+    this.router.navigate( [ '/autores/form/' , selected[0].id ] );
   }
 
 }

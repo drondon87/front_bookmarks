@@ -13,11 +13,11 @@ import { BookmarkResponse } from '../models/bookmark.response.model';
 export class LibroService {
 
   private urlEndpoint: string = environment.urlEndpoint;
-  private controller: string = 'libros';
+  private controller = 'libros';
 
   constructor(private http: HttpClient) { }
 
-  public getLibros() : Observable<Libro[]>  {
+  public getLibros(): Observable<Libro[]>  {
     return this.http.get(`${this.urlEndpoint}/${this.controller}`)
     .pipe(
       map((resp: any) => resp['data'] as Libro[] ),
@@ -46,7 +46,7 @@ export class LibroService {
     );
   }
 
-  public obtenerLibro(id: number) : Observable<Libro> {
+  public obtenerLibro(id: number): Observable<Libro> {
     return this.http.get(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Libro ),
@@ -56,7 +56,7 @@ export class LibroService {
     );
   }
 
-  public getLibrosByCategoria(id: number) : Observable<Libro[]>  {
+  public getLibrosByCategoria(id: number): Observable<Libro[]>  {
     return this.http.get(`${this.urlEndpoint}/${this.controller}/categoria/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Libro[] ),

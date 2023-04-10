@@ -37,7 +37,7 @@ export class ListaLibroCategoriaComponent implements OnInit {
 
   public buscarLibros(): void{
     this.initColumnsTable();
-    this._libroService.getLibrosByCategoria(this.categoriaId).subscribe(resp =>{
+    this._libroService.getLibrosByCategoria(this.categoriaId).subscribe(resp => {
        this.libros = resp;
     });
   }
@@ -57,8 +57,8 @@ export class ListaLibroCategoriaComponent implements OnInit {
     ];
   }
 
-  onSelect({ selected }) {
-    this.router.navigate(['/libros/form/',selected[0].id]);
+  onSelect({ selected }): void {
+    this.router.navigate( [ '/libros/form/', selected[0].id ] );
   }
 
 }

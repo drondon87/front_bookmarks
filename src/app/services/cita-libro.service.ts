@@ -16,7 +16,7 @@ export class CitaLibroService {
 
   constructor(private http: HttpClient) { }
 
-  public obtenerCitaLibro(id: number) : Observable<CitaLibro> {
+  public obtenerCitaLibro(id: number): Observable<CitaLibro> {
     return this.http.get(`${this.urlEndpoint}/citalibro/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as CitaLibro ),
@@ -45,7 +45,7 @@ export class CitaLibroService {
     );
   }
 
-  public buscarCitasLibrosByLibro(id: number) : Observable<CitaLibro[]>  {
+  public buscarCitasLibrosByLibro(id: number): Observable<CitaLibro[]>  {
     return this.http.get(`${this.urlEndpoint}/citalibro/libro/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as CitaLibro[] ),
@@ -55,7 +55,7 @@ export class CitaLibroService {
     );
   }
 
-  public buscarCitasLibros() : Observable<CitaLibro[]>  {
+  public buscarCitasLibros(): Observable<CitaLibro[]>  {
     return this.http.get(`${this.urlEndpoint}/citalibro`)
     .pipe(
       map((resp: any) => resp['data'] as CitaLibro[] ),

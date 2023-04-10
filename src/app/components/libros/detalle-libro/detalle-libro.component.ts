@@ -22,7 +22,7 @@ export class DetalleLibroComponent implements OnInit {
 
   public libro: Libro = new Libro();
   public libroForm: FormGroup;
-  public consulta: boolean = false;
+  public consulta = false;
   public categorias: Categoria[] = [];
   public createLibro: CreateLibro = new CreateLibro();
   public autores: Autor[] = [];
@@ -48,8 +48,8 @@ export class DetalleLibroComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.paramMap.subscribe(params => {
-      let id:number = +params.get('id');
-      if(id !== 0){
+      const id: number = +params.get('id');
+      if ( id !== 0 ){
         this.consulta = true;
         this._libroService.obtenerLibro(id).subscribe(libro => this.asignarValores(libro));
       }
@@ -61,32 +61,32 @@ export class DetalleLibroComponent implements OnInit {
 
   public initForm(): void {
     this.libroForm = this.fb.group({
-      nombre: [{value:'' , disabled: this.consulta}, Validators.required],
-      descripcion: [{value:'' , disabled: this.consulta}, Validators.required],
-      fechaLibro: [{value:'' , disabled: this.consulta}],
-      categoriaId: [{value:'' , disabled: this.consulta}, Validators.required],
-      autorId: [{value:'' , disabled: this.consulta}, Validators.required]
+      nombre: [ {value: '' , disabled: this.consulta}, Validators.required],
+      descripcion: [ {value: '' , disabled: this.consulta}, Validators.required],
+      fechaLibro: [ {value: '' , disabled: this.consulta}],
+      categoriaId: [ {value: '' , disabled: this.consulta}, Validators.required],
+      autorId: [ {value: '' , disabled: this.consulta}, Validators.required]
     });
   }
 
-  public asignarValores(libro: Libro) : void {
+  public asignarValores(libro: Libro): void {
     this.libro = libro;
     this.libroForm.setValue({
       nombre: libro.nombre,
       descripcion: libro.descripcion,
-      fechaLibro: formatDate(libro.createAt,'dd/MM/yyyy','en') ,
+      fechaLibro: formatDate(libro.createAt, 'dd/MM/yyyy', 'en') ,
       categoriaId: libro.categoria.id,
       autorId: libro.autor.id
     });
   }
 
-  public guardarLibro() : void {
-    if(this.libroForm.invalid){ return;}
+  public guardarLibro(): void {
+    if (this.libroForm.invalid){ return; }
 
-    const { nombre, descripcion, fechaLibro, categoriaId, autorId } = this.libroForm.value;
+    const { nombre, descripcion, categoriaId, autorId } = this.libroForm.value;
 
     this.createLibro.nombre = nombre;
-    this.createLibro.descripcion= descripcion;
+    this.createLibro.descripcion = descripcion;
     this.createLibro.categoriaId = categoriaId;
     this.createLibro.autorId = autorId;
 
@@ -98,7 +98,7 @@ export class DetalleLibroComponent implements OnInit {
 
     this._libroService.crearLibro(this.createLibro)
     .subscribe(libro => {
-      Swal.fire(this._translateService.instant('DIALOG.BOOK_ADD'), `${this._translateService.instant('DIALOG.BOOK_ADD_TEXT')} ${libro.nombre} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`,'success');
+      Swal.fire(this._translateService.instant('DIALOG.BOOK_ADD'), `${this._translateService.instant('DIALOG.BOOK_ADD_TEXT')} ${libro.nombre} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`, 'success');
       this.router.navigate(['/libros']);
     },
     err => {
@@ -106,7 +106,7 @@ export class DetalleLibroComponent implements OnInit {
         title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
         text:  err.error.error,
         icon: 'error'
-      })
+      });
     }
   );
 
@@ -125,32 +125,29 @@ export class DetalleLibroComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this._libroService.borrarLibro(this.libro.id).subscribe((resp: BookmarkResponse) => {
-          if(resp.status === 'OK'){
+          if (resp.status === 'OK'){
             Swal.fire(
               this._translateService.instant('DIALOG.BOOK_DELETED'),
               `${resp}`,
               'success'
-            )
+            );
             this.router.navigate(['libros']);
           }else{
             Swal.fire({
               title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
               text:  resp.message,
               icon: 'error'
-            })
+            });
           }
-
         },
         err => {
           Swal.fire({
             title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
             text:  err.error.error,
             icon: 'error'
-          })
+          });
         });
-
       }
-    })
+    });
   }
-
 }

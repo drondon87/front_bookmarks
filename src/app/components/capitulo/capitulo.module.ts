@@ -23,6 +23,6 @@ import { NgxMaskModule } from 'ngx-mask';
     NgxDatatableModule,
     NgxMaskModule.forChild()
   ],
-  exports:[ListaCapituloComponent, DetalleCapituloComponent]
+  exports: [ListaCapituloComponent, DetalleCapituloComponent]
 })
 export class CapituloModule { }

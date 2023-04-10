@@ -18,7 +18,7 @@ export class ListaCitaLibroComponent implements OnInit {
   @ViewChild('hdrTpl', { static: true }) hdrTpl: TemplateRef<any>;
 
   public libros: Libro[] = [];
-  public libroId: number = 0;
+  public libroId = 0;
   public citasLibros: CitaLibro[] = [];
 
   public data = [];
@@ -36,7 +36,7 @@ export class ListaCitaLibroComponent implements OnInit {
     this._libroService.getLibros().subscribe(resp => this.libros = resp);
   }
 
-  buscarCitasLibro(){
+  buscarCitasLibro(): void {
     this.initColumnsTable();
     this._citaLibroService.buscarCitasLibrosByLibro(this.libroId).subscribe(resp => {
       this.citasLibros = resp as CitaLibro[];
@@ -45,8 +45,8 @@ export class ListaCitaLibroComponent implements OnInit {
 
   }
 
-  public crearCitaLibro(){
-    this.router.navigate(['/libros/citaLibro/form/libro/',this.libroId]);
+  public crearCitaLibro(): void{
+    this.router.navigate( [ '/libros/citaLibro/form/libro/' , this.libroId ] );
   }
 
   public initColumnsTable(): void {
@@ -65,8 +65,8 @@ export class ListaCitaLibroComponent implements OnInit {
     ];
   }
 
-  onSelect({ selected }) {
-    this.router.navigate(['/libros/citaLibro/form/',selected[0].id]);
+  onSelect({ selected }): void {
+    this.router.navigate( [ '/libros/citaLibro/form/', selected[0].id ] );
   }
 
 }

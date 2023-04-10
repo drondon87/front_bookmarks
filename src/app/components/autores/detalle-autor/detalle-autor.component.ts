@@ -16,22 +16,23 @@ export class DetalleAutorComponent implements OnInit {
 
   public autor: Autor = new Autor();
   public autorForm: FormGroup;
-  public consulta: boolean = false;
+  public consulta = false;
 
   constructor(private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    private _autorService: AutorService,
-    private router: Router,
-    private _translateService: TranslateService) { }
+              private activatedRoute: ActivatedRoute,
+              private _autorService: AutorService,
+              private router: Router,
+              private _translateService: TranslateService
+            ) { }
 
-  get nombre(){ return this.autorForm.get('nombre'); }
+  get nombre() { return this.autorForm.get('nombre'); }
 
   get apellido(){ return this.autorForm.get('apellido'); }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      let id:number = +params.get('id');
-      if(id !== 0){
+      const id: number = +params.get('id');
+      if ( id !== 0 ) {
         this.consulta = true;
         this._autorService.obtenerAutor(id).subscribe(autor => this.asignarValores(autor));
       }
@@ -41,12 +42,12 @@ export class DetalleAutorComponent implements OnInit {
 
   public initForm(): void {
     this.autorForm = this.fb.group({
-      nombre: [{value:'' , disabled: this.consulta}, Validators.required],
-      apellido: [{value:'' , disabled: this.consulta}, Validators.required]
+      nombre: [ { value: '' , disabled: this.consulta }, Validators.required ],
+      apellido: [ { value: '' , disabled: this.consulta }, Validators.required ]
     });
   }
 
-  public asignarValores(autor: Autor) : void {
+  public asignarValores(autor: Autor): void {
     this.autor = autor;
     this.autorForm.setValue({
       nombre: autor.nombre,
@@ -54,9 +55,9 @@ export class DetalleAutorComponent implements OnInit {
     });
   }
 
-  public guardarAutor() : void {
+  public guardarAutor(): void {
 
-    if(this.autorForm.invalid){ return;}
+    if ( this.autorForm.invalid ){ return; }
 
     const { nombre, apellido } = this.autorForm.value;
 
@@ -65,7 +66,7 @@ export class DetalleAutorComponent implements OnInit {
 
     this._autorService.crearAutor(this.autor)
       .subscribe(autor => {
-        Swal.fire(this._translateService.instant('DIALOG.AUTHOR_ADD'), `${this._translateService.instant('DIALOG.AUTHOR_ADD_TEXT')} ${autor.nombre} ${autor.apellido} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`,'success');
+        Swal.fire(this._translateService.instant('DIALOG.AUTHOR_ADD'), `${this._translateService.instant('DIALOG.AUTHOR_ADD_TEXT')} ${autor.nombre} ${autor.apellido} ${this._translateService.instant('DIALOG.ADDED_SUCCESSFUL')}`, 'success');
         this.router.navigate(['/autores']);
       },
       err => {
@@ -73,7 +74,7 @@ export class DetalleAutorComponent implements OnInit {
           title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
           text:  err.error.error,
           icon: 'error'
-        })
+        });
       }
     );
   }
@@ -91,19 +92,19 @@ export class DetalleAutorComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this._autorService.borrarAutor(this.autor.id).subscribe((resp: BookmarkResponse) => {
-          if(resp.status === 'OK'){
+          if ( resp.status === 'OK' ) {
             Swal.fire(
               this._translateService.instant('DIALOG.AUTHOR_DELETED'),
               `${resp}`,
               'success'
-            )
+            );
             this.router.navigate(['autores']);
           }else{
             Swal.fire({
               title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
               text:  resp.message,
               icon: 'error'
-            })
+            });
           }
         },
         err => {
@@ -111,11 +112,11 @@ export class DetalleAutorComponent implements OnInit {
             title: `${this._translateService.instant('DIALOG.ERROR_TITLE')}`,
             text:  err.error.error,
             icon: 'error'
-          })
+          });
         });
 
       }
-    })
+    });
   }
 
 }

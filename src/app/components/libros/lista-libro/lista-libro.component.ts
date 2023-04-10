@@ -47,8 +47,8 @@ export class ListaLibroComponent implements OnInit {
     ];
   }
 
-  onSelect({ selected }) {
-    this.router.navigate(['/libros/form/',selected[0].id]);
+  onSelect({ selected }): void {
+    this.router.navigate( [ '/libros/form/', selected[0].id ] );
   }
 
 }

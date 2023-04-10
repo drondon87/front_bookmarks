@@ -12,11 +12,11 @@ import { BookmarkResponse } from '../models/bookmark.response.model';
 export class CategoriaService {
 
   private urlEndpoint: string = environment.urlEndpoint;
-  private controller: string = 'categorias';
+  private controller = 'categorias';
 
   constructor(private http: HttpClient) { }
 
-  public getCategorias() : Observable<Categoria[]>  {
+  public getCategorias(): Observable<Categoria[]>  {
     return this.http.get(`${this.urlEndpoint}/${this.controller}`)
     .pipe(
       map((resp: any) => resp['data'] as Categoria[] ),
@@ -36,7 +36,7 @@ export class CategoriaService {
     );
   }
 
-  public obtenerCategoria(id: number) : Observable<Categoria> {
+  public obtenerCategoria(id: number): Observable<Categoria> {
     return this.http.get(`${this.urlEndpoint}/${this.controller}/${id}`)
     .pipe(
       map((resp: any) => resp['data'] as Categoria ),
